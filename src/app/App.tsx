@@ -4,6 +4,7 @@ import { Footer } from "./components/Footer";
 import { WhatsAppButton } from "./components/WhatsAppButton";
 import { HomePage } from "./pages/HomePage";
 import { SolutionsPage } from "./pages/SolutionsPage";
+import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { AboutPage } from "./pages/AboutPage";
 import { BlogPage } from "./pages/BlogPage";
 import { ClientsPage } from "./pages/ClientsPage";
@@ -20,6 +21,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/solucoes" element={<SolutionsPage />} />
+            <Route path="/produto/:id" element={<ProductDetailPage />} />
             <Route path="/quem-somos" element={<AboutPage />} />
             <Route path="/clientes" element={<ClientsPage />} />
             <Route path="/blog" element={<BlogPage />} />

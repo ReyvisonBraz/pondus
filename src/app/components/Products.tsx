@@ -7,6 +7,7 @@ import { GlowButton } from "./ui/glow-button";
 
 const products = [
   {
+    id: "pcsl-22000",
     icon: PackageCheck,
     name: "Contadora de Sementes PCSL 22000",
     description: "Controle e padronização de lotes com redução de falhas operacionais",
@@ -14,6 +15,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80"
   },
   {
+    id: "pebbag-1500",
     icon: Boxes,
     name: "Ensacadeira Eletrônica Automática para Big-Bags PEBBAG 1500",
     description: "Automação no ensaque com ganho de produtividade e padronização",
@@ -21,6 +23,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80"
   },
   {
+    id: "pevps-2060",
     icon: Package,
     name: "Ensacadeira Eletrônica de Sopro para Sacos Valvulados PEVPS 2060",
     description: "Eficiência no ensaque com melhor desempenho operacional",
@@ -28,6 +31,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80"
   },
   {
+    id: "pfd-30t",
     icon: Gauge,
     name: "Balança de Fluxo para Sementes e Grãos PFD 30T",
     description: "Controle contínuo do fluxo com estabilidade na operação",
@@ -35,6 +39,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80"
   },
   {
+    id: "pebe-2000",
     icon: Scale,
     name: "Ensacadeira Eletrônica com Dosagem Automática para Big-Bags PEBE2000",
     description: "Controle da dosagem com maior estabilidade no processo",
@@ -42,6 +47,7 @@ const products = [
     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
   },
   {
+    id: "peved-2060",
     icon: PackageCheck,
     name: "Ensacadeira Eletrônica PEVED 2060",
     description: "Versatilidade no ensaque para diferentes aplicações",
@@ -101,6 +107,7 @@ export function Products() {
               transition={{ duration: 0.5, delay: index * 0.08 }}
               className="group relative bg-white rounded-2xl border-2 border-gray-200 hover:border-transparent overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
               whileHover={{ y: -4, scale: 1.01 }}
+              onClick={() => navigate(`/produto/${product.id}`)}
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">

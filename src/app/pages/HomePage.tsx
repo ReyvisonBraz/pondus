@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Hero } from "../components/Hero";
+import { Ticker } from "../components/Ticker";
 import { Products } from "../components/Products";
 import { Differentials } from "../components/Differentials";
 import { EquipmentShowcase } from "../components/EquipmentShowcase";
@@ -15,6 +16,7 @@ export function HomePage() {
   return (
     <>
       <Hero />
+      <Ticker />
       <Products />
       <Differentials />
       <EquipmentShowcase />
