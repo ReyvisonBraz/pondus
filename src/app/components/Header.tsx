@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GlowButton } from "./ui/glow-button";
+import { useProposalModal } from "./ProposalModalContext";
 import pondusSvg from "../../imports/PONDUS_SOBRE.svg";
 
 const products = [
@@ -22,6 +23,7 @@ export function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { openProposalModal } = useProposalModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -221,10 +223,7 @@ export function Header() {
             <GlowButton
               label="Solicite uma Proposta"
               variant="primary"
-              onClick={() => {
-                navigate('/contato');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+              onClick={openProposalModal}
               className="px-6 py-3 text-sm shine-continuous"
             />
           </motion.div>
@@ -327,8 +326,7 @@ export function Header() {
               variant="primary"
               onClick={() => {
                 setMobileMenuOpen(false);
-                navigate('/contato');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                openProposalModal();
               }}
               className="w-full px-6 py-3 text-sm shine-continuous"
             />

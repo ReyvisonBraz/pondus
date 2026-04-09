@@ -1,10 +1,10 @@
 import { motion } from "motion/react";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 import { GlowButton } from "./ui/glow-button";
+import { useProposalModal } from "./ProposalModalContext";
 
 export function CTA() {
-  const navigate = useNavigate();
+  const { openProposalModal } = useProposalModal();
 
   return (
     <section className="relative py-24 md:py-32 bg-gradient-to-br from-white via-gray-50 to-white overflow-hidden">
@@ -98,10 +98,7 @@ export function CTA() {
               <GlowButton
                 label="Solicite uma Proposta"
                 variant="primary"
-                onClick={() => {
-                  navigate('/contato');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
+                onClick={openProposalModal}
                 className="text-base md:text-lg"
               />
             </motion.div>

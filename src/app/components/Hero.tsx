@@ -57,13 +57,7 @@ export function Hero() {
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#1a3a5c] mb-8 tracking-tight leading-[1.1] px-4"
           style={{ fontWeight: 800, letterSpacing: '-0.02em' }}
         >
-          Mais controle e padronização no
-          <br />
-          <span className="glow-text">
-            processamento de sementes
-          </span>
-          <br />
-          e de materiais granulares
+          Mais que automação: <span className="glow-text">consistência</span> e <span className="glow-text">precisão</span> que garantem resultados, safra após safra.
         </motion.h1>
 
         <motion.p
@@ -72,7 +66,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed px-4"
         >
-          Soluções em pesagem, contagem e ensaque para agroindústrias, sementeiras, fertilizantes e operações com granéis
+          Mais controle e padronização no processamento de sementes e materiais granulares.
         </motion.p>
 
         <motion.div

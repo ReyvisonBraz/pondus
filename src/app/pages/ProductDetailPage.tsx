@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { motion } from "motion/react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { ArrowLeft, CheckCircle, TrendingUp, Zap, AlertCircle, Link as LinkIcon, ChevronRight } from "lucide-react";
+import { useProposalModal } from "../components/ProposalModalContext";
 
 const productsData: Record<string, {
   name: string;
@@ -142,6 +143,7 @@ const relatedImages: Record<string, string> = {
 export function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { openProposalModal } = useProposalModal();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -238,7 +240,7 @@ export function ProductDetailPage() {
 
               <div className="flex gap-4 mb-12">
                 <button
-                  onClick={() => navigate('/contato')}
+                  onClick={openProposalModal}
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-[#f5a623] to-[#e8951a] text-[#002444] px-8 py-4 rounded font-bold text-xs tracking-[0.2em] uppercase hover:shadow-lg hover:shadow-[#f5a623]/30 transition-all hover:-translate-y-0.5"
                   style={{ fontFamily: "'DM Mono', monospace" }}
                 >

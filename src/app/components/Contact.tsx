@@ -1,17 +1,34 @@
 import { motion } from "motion/react";
 import { useInView } from "motion/react";
 import { useRef, useState } from "react";
-import { Send, User, Building2, Phone, Mail, MessageSquare } from "lucide-react";
-import { GlowButton } from "./ui/glow-button";
+import { MessageCircle, Mail, Phone, MapPin, Clock, ArrowLeft, Copy, Check } from "lucide-react";
+
+const WHATSAPP_NUMBER = "5599900799";
+const EMAIL = "dutra@pondusrs.com.br";
 
 export function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [focused, setFocused] = useState<string | null>(null);
+  const [selectedMethod, setSelectedMethod] = useState<"whatsapp" | "email" | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleWhatsAppClick = () => {
+    const message = encodeURIComponent("Olá! Vim pelo site e gostaria de falar com um especialista.");
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.log("Failed to copy");
+    }
+  };
 
   return (
     <section id="contato" className="relative py-24 md:py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-      {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: `linear-gradient(rgba(26, 58, 92, 0.2) 1px, transparent 1px),
@@ -20,8 +37,7 @@ export function Contact() {
         }} />
       </div>
 
-      <div ref={ref} className="relative max-w-5xl mx-auto px-6 lg:px-12">
-        {/* Section Header */}
+      <div ref={ref} className="relative max-w-4xl mx-auto px-6 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -34,161 +50,217 @@ export function Contact() {
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1a3a5c] mb-6 tracking-tight leading-tight" style={{ fontWeight: 800 }}>
-            Fale com Nossa
+            {selectedMethod === "whatsapp" ? "Fale via" : selectedMethod === "email" ? "Fale via" : "Fale com Nossa"}
             <br />
-            <span className="text-[#f5a623]">Equipe</span>
+            <span className="text-[#f5a623]">
+              {selectedMethod === "whatsapp" ? "WhatsApp" : selectedMethod === "email" ? "E-mail" : "Equipe"}
+            </span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-            Entenda como aplicar as soluções Pondus na sua operação
+            {selectedMethod === "whatsapp" 
+              ? "Inicie uma conversa rápida com nossos especialistas"
+              : selectedMethod === "email"
+              ? "Envie sua mensagem e responderemos em breve"
+              : "Escolha como prefere entrar em contato conosco"}
           </p>
         </motion.div>
 
-        {/* Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white p-8 md:p-12 rounded-3xl border-2 border-gray-200 shadow-2xl"
-        >
-          <form className="space-y-6">
-            {/* Nome */}
-            <div className="relative">
-              <label className="block text-gray-600 mb-3 text-sm tracking-wide uppercase" style={{ fontWeight: 600 }}>
-                <User className="inline-block w-4 h-4 mr-2" />
-                Nome Completo
-              </label>
-              <input
-                type="text"
-                onFocus={() => setFocused("nome")}
-                onBlur={() => setFocused(null)}
-                className="w-full bg-gray-50 border-2 border-gray-200 focus:border-[#1a3a5c] rounded-xl px-6 py-4 text-gray-900 transition-all duration-300 outline-none"
-                placeholder="Seu nome"
-              />
-              {focused === "nome" && (
-                <motion.div
-                  layoutId="input-glow"
-                  className="absolute inset-0 rounded-xl pointer-events-none"
-                  style={{
-                    boxShadow: "0 0 20px rgba(26, 58, 92, 0.2)"
-                  }}
-                />
-              )}
-            </div>
-
-            {/* Empresa */}
-            <div className="relative">
-              <label className="block text-gray-600 mb-3 text-sm tracking-wide uppercase" style={{ fontWeight: 600 }}>
-                <Building2 className="inline-block w-4 h-4 mr-2" />
-                Empresa
-              </label>
-              <input
-                type="text"
-                onFocus={() => setFocused("empresa")}
-                onBlur={() => setFocused(null)}
-                className="w-full bg-gray-50 border-2 border-gray-200 focus:border-[#1a3a5c] rounded-xl px-6 py-4 text-gray-900 transition-all duration-300 outline-none"
-                placeholder="Nome da empresa"
-              />
-              {focused === "empresa" && (
-                <motion.div
-                  layoutId="input-glow"
-                  className="absolute inset-0 rounded-xl pointer-events-none"
-                  style={{
-                    boxShadow: "0 0 20px rgba(26, 58, 92, 0.2)"
-                  }}
-                />
-              )}
-            </div>
-
-            {/* Telefone e Email */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="relative">
-                <label className="block text-gray-600 mb-3 text-sm tracking-wide uppercase" style={{ fontWeight: 600 }}>
-                  <Phone className="inline-block w-4 h-4 mr-2" />
-                  Telefone
-                </label>
-                <input
-                  type="tel"
-                  onFocus={() => setFocused("telefone")}
-                  onBlur={() => setFocused(null)}
-                  className="w-full bg-gray-50 border-2 border-gray-200 focus:border-[#1a3a5c] rounded-xl px-6 py-4 text-gray-900 transition-all duration-300 outline-none"
-                  placeholder="(00) 00000-0000"
-                />
-                {focused === "telefone" && (
-                  <motion.div
-                    layoutId="input-glow"
-                    className="absolute inset-0 rounded-xl pointer-events-none"
-                    style={{
-                      boxShadow: "0 0 20px rgba(26, 58, 92, 0.2)"
-                    }}
-                  />
-                )}
-              </div>
-
-              <div className="relative">
-                <label className="block text-gray-600 mb-3 text-sm tracking-wide uppercase" style={{ fontWeight: 600 }}>
-                  <Mail className="inline-block w-4 h-4 mr-2" />
-                  Email
-                </label>
-                <input
-                  type="email"
-                  onFocus={() => setFocused("email")}
-                  onBlur={() => setFocused(null)}
-                  className="w-full bg-gray-50 border-2 border-gray-200 focus:border-[#1a3a5c] rounded-xl px-6 py-4 text-gray-900 transition-all duration-300 outline-none"
-                  placeholder="seu@email.com"
-                />
-                {focused === "email" && (
-                  <motion.div
-                    layoutId="input-glow"
-                    className="absolute inset-0 rounded-xl pointer-events-none"
-                    style={{
-                      boxShadow: "0 0 20px rgba(26, 58, 92, 0.2)"
-                    }}
-                  />
-                )}
-              </div>
-            </div>
-
-            {/* Mensagem */}
-            <div className="relative">
-              <label className="block text-gray-600 mb-3 text-sm tracking-wide uppercase" style={{ fontWeight: 600 }}>
-                <MessageSquare className="inline-block w-4 h-4 mr-2" />
-                Mensagem
-              </label>
-              <textarea
-                onFocus={() => setFocused("mensagem")}
-                onBlur={() => setFocused(null)}
-                rows={5}
-                className="w-full bg-gray-50 border-2 border-gray-200 focus:border-[#1a3a5c] rounded-xl px-6 py-4 text-gray-900 transition-all duration-300 outline-none resize-none"
-                placeholder="Descreva seu projeto ou necessidade..."
-              />
-              {focused === "mensagem" && (
-                <motion.div
-                  layoutId="input-glow"
-                  className="absolute inset-0 rounded-xl pointer-events-none"
-                  style={{
-                    boxShadow: "0 0 20px rgba(26, 58, 92, 0.2)"
-                  }}
-                />
-              )}
-            </div>
-
-            {/* Submit Button */}
-            <motion.div
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
+        {!selectedMethod ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSelectedMethod("whatsapp")}
+              className="flex flex-col items-center gap-5 p-10 rounded-3xl border-2 border-gray-100 hover:border-[#25D366] bg-white hover:bg-[#25D366]/5 transition-all shadow-lg"
             >
-              <GlowButton
-                label="Enviar Solicitação"
-                variant="primary"
-                icon={<Send className="w-5 h-5" />}
-                className="w-full"
-                type="submit"
-              />
-            </motion.div>
-          </form>
-        </motion.div>
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] flex items-center justify-center shadow-lg shadow-[#25D366]/30">
+                <MessageCircle className="w-10 h-10 text-white" />
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-bold text-[#1a3a5c] mb-2" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                  WhatsApp
+                </p>
+                <p className="text-sm text-gray-500">Resposta mais rápida</p>
+                <p className="text-xs text-[#25D366] mt-2 font-medium">(11) 99900-7999</p>
+              </div>
+            </motion.button>
 
-        {/* Privacy Note */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSelectedMethod("email")}
+              className="flex flex-col items-center gap-5 p-10 rounded-3xl border-2 border-gray-100 hover:border-[#1a3a5c] bg-white hover:bg-[#1a3a5c]/5 transition-all shadow-lg"
+            >
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#1a3a5c] to-[#2a4a6c] flex items-center justify-center shadow-lg shadow-[#1a3a5c]/30">
+                <Mail className="w-10 h-10 text-white" />
+              </div>
+              <div className="text-center">
+                <p className="text-xl font-bold text-[#1a3a5c] mb-2" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                  E-mail
+                </p>
+                <p className="text-sm text-gray-500">Solicitação formal</p>
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleCopyEmail(); }}
+                  className="text-xs text-[#1a3a5c] mt-2 font-medium flex items-center justify-center gap-1 hover:text-[#f5a623] transition-colors mx-auto"
+                >
+                  {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                  {EMAIL}
+                </button>
+              </div>
+            </motion.button>
+          </motion.div>
+        ) : selectedMethod === "whatsapp" ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-3xl border-2 border-[#25D366]/30 shadow-2xl overflow-hidden"
+          >
+            <div className="bg-gradient-to-r from-[#25D366] to-[#128C7E] px-8 py-6">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setSelectedMethod(null)}
+                  className="p-2 rounded-full hover:bg-white/20 transition-colors"
+                >
+                  <ArrowLeft className="w-5 h-5 text-white" />
+                </button>
+                <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                  <MessageCircle className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-white font-bold" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                    WhatsApp
+                  </p>
+                  <p className="text-white/80 text-sm">Resposta em horário comercial</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-8">
+              <div className="bg-[#f6f7f8] rounded-2xl p-6 mb-8">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-5 h-5 text-[#25D366]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Número</p>
+                    <p className="text-lg font-bold text-[#1a3a5c]">(11) 99900-7999</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5 text-[#25D366]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Horário</p>
+                    <p className="text-lg font-bold text-[#1a3a5c]">Seg - Sex: 8h às 18h</p>
+                  </div>
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                onClick={handleWhatsAppClick}
+                className="w-full py-5 rounded-xl font-bold text-sm tracking-wide uppercase flex items-center justify-center gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white hover:shadow-lg shadow-[#25D366]/30 transition-all"
+              >
+                <MessageCircle className="w-5 h-5" />
+                Iniciar Conversa no WhatsApp
+              </motion.button>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-3xl border-2 border-[#1a3a5c]/30 shadow-2xl overflow-hidden"
+          >
+            <div className="bg-gradient-to-r from-[#1a3a5c] to-[#2a4a6c] px-8 py-6">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setSelectedMethod(null)}
+                  className="p-2 rounded-full hover:bg-white/20 transition-colors"
+                >
+                  <ArrowLeft className="w-5 h-5 text-white" />
+                </button>
+                <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-white font-bold" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                    E-mail
+                  </p>
+                  <p className="text-white/80 text-sm">Respondemos em até 24h</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-8">
+              <div className="bg-[#f6f7f8] rounded-2xl p-6 mb-8">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-[#1a3a5c]/10 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-5 h-5 text-[#1a3a5c]" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">E-mail Principal</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-lg font-bold text-[#1a3a5c]">{EMAIL}</p>
+                      <button
+                        onClick={handleCopyEmail}
+                        className="p-1.5 rounded-lg hover:bg-[#1a3a5c]/10 transition-colors"
+                        title="Copiar email"
+                      >
+                        {copied ? (
+                          <Check className="w-4 h-4 text-green-500" />
+                        ) : (
+                          <Copy className="w-4 h-4 text-gray-400 hover:text-[#1a3a5c]" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-[#1a3a5c]/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-[#1a3a5c]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Endereço</p>
+                    <p className="text-base font-bold text-[#1a3a5c]">São Paulo, SP - Brasil</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#1a3a5c]/10 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5 text-[#1a3a5c]" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Horário de Atendimento</p>
+                    <p className="text-base font-bold text-[#1a3a5c]">Seg - Sex: 8h às 18h</p>
+                  </div>
+                </div>
+              </div>
+
+              <motion.a
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                href={`mailto:${EMAIL}?subject=Contato%20via%20Site`}
+                className="w-full py-5 rounded-xl font-bold text-sm tracking-wide uppercase flex items-center justify-center gap-3 bg-gradient-to-r from-[#1a3a5c] to-[#2a4a6c] text-white hover:shadow-lg shadow-[#1a3a5c]/30 transition-all"
+              >
+                <Mail className="w-5 h-5" />
+                Enviar E-mail
+              </motion.a>
+            </div>
+          </motion.div>
+        )}
+
         <motion.p
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}

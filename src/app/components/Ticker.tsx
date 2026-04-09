@@ -15,7 +15,7 @@ export function Ticker() {
   const repeatedItems = [...tickerItems, ...tickerItems];
 
   return (
-    <div className="bg-[#f5a623] py-3 overflow-hidden white-space-nowrap">
+    <div className="bg-[#f5a623] py-4 overflow-hidden white-space-nowrap">
       <motion.div
         className="inline-flex"
         animate={{ x: ["0%", "-50%"] }}
@@ -31,15 +31,15 @@ export function Ticker() {
         {repeatedItems.map((item, index) => (
           <span
             key={index}
-            className="inline-flex items-center gap-4 px-9"
+            className="inline-flex items-center gap-6 px-10"
           >
             <span
-              className="font-mono text-[10px] tracking-[0.22em] uppercase font-medium text-[#002444] whitespace-nowrap"
+              className="font-mono text-lg tracking-[0.25em] uppercase font-medium text-[#002444] whitespace-nowrap"
               style={{ fontFamily: "'DM Mono', monospace" }}
             >
               {item}
             </span>
-            <span className="w-1 h-1 rounded-full bg-[#002444]/30" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#002444]/30" />
           </span>
         ))}
       </motion.div>

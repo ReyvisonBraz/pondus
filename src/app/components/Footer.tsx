@@ -170,12 +170,9 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-[#f5a623] mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-gray-400 text-xs mb-1.5 uppercase tracking-wide">Telefones</p>
-                  <a href="tel:+555531950036" className="text-gray-200 hover:text-[#f5a623] transition-colors block text-sm mb-1">
-                    +55 (55) 3195-036
-                  </a>
-                  <a href="https://wa.me/5555999900799" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-[#f5a623] transition-colors block text-sm">
-                    +55 (55) 99990-0799
+                  <p className="text-gray-400 text-xs mb-1.5 uppercase tracking-wide">WhatsApp</p>
+                  <a href="https://wa.me/555599900799" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-[#f5a623] transition-colors block text-sm">
+                    +55 (55) 99900-0799
                   </a>
                 </div>
               </li>
