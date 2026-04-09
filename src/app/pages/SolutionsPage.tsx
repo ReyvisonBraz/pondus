@@ -1,92 +1,261 @@
-import { useEffect, useRef } from "react";
-import { motion, useInView } from "motion/react";
-import { Scale, Gauge, PackageCheck, Package, Boxes, CheckCircle, TrendingUp, AlertCircle, Link as LinkIcon, Zap } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useInView } from "motion/react";
+import { Scale, Gauge, PackageCheck, Package, Boxes, CheckCircle, TrendingUp, Zap, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Contact } from "../components/Contact";
+import { GlowButton } from "../components/ui/glow-button";
 
 const products = [
   {
     id: "pcsl-22000",
     icon: PackageCheck,
     name: "Contadora de Sementes PCSL 22000",
-    description: "Controle e padronização de lotes com redução de falhas operacionais",
+    tagline: "Precisão que transforma sua produção",
+    description: "Sistema de contagem de alta precisão para sementes e grãos. Elimina falhas operacionais e garante padronização completa dos lotes.",
+    features: ["Contagem precisa por lote", "Redução de retrabalho", "Interface intuitiva", "Relatórios em tempo real"],
     color: "#1a3a5c",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80",
-    benefits: [
-      { icon: AlertCircle, text: "Redução de falhas e retrabalho" },
-      { icon: CheckCircle, text: "Padronização dos lotes" },
-      { icon: TrendingUp, text: "Mais controle sobre a operação" }
-    ]
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&q=80",
+    badge: "Mais Vendida"
   },
   {
     id: "pebbag-1500",
     icon: Boxes,
-    name: "Ensacadeira Eletrônica Automática para Big-Bags PEBBAG 1500",
-    description: "Automação no ensaque com ganho de produtividade e padronização",
+    name: "Ensacadeira Big-Bags PEBBAG 1500",
+    tagline: "Automação que acelera sua expedição",
+    description: "Ensacadeira automática para big-bags com ganho de produtividade de até 40%. Integração direta com linhas de produção existentes.",
+    features: ["Capacidade de 500kg a 2000kg", "Velocidade de até 120 big-bags/hora", "Calibragem automática", "Sistema de pesagem integrado"],
     color: "#f5a623",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
-    benefits: [
-      { icon: Zap, text: "Ganho de produtividade" },
-      { icon: CheckCircle, text: "Padronização da expedição" },
-      { icon: LinkIcon, text: "Integração com sistemas existentes" }
-    ]
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80",
+    badge: null
   },
   {
     id: "pevps-2060",
     icon: Package,
-    name: "Ensacadeira Eletrônica de Sopro para Sacos Valvulados PEVPS 2060",
-    description: "Eficiência no ensaque com melhor desempenho operacional",
+    name: "Ensacadeira de Sopro PEVPS 2060",
+    tagline: "Eficiência em cada sopro",
+    description: "Sistema de ensaque por sopro para sacos valvulados. Maximiza a eficiência operacional com controle preciso de peso.",
+    features: [" وزن دقيق لكل كيس", "Velocidade ajustável", "Baixo consumo de energia", "Manutenção simplificada"],
     color: "#1a3a5c",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80",
-    benefits: [
-      { icon: Zap, text: "Ganho de produtividade" },
-      { icon: AlertCircle, text: "Redução de falhas" },
-      { icon: TrendingUp, text: "Melhor desempenho operacional" }
-    ]
+    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200&q=80",
+    badge: null
   },
   {
     id: "pfd-30t",
     icon: Gauge,
-    name: "Balança de Fluxo para Sementes e Grãos PFD 30T",
-    description: "Controle contínuo do fluxo com estabilidade na operação",
+    name: "Balança de Fluxo PFD 30T",
+    tagline: "Controle contínuo, estabilidade total",
+    description: "Balança de fluxo para sementes e grãos com controle contínuo. Estabilidade operacional 24/7 com monitoramento remoto.",
+    features: ["Capacidade de 30 toneladas/hora", "Precisão de ±0.1%", "Monitoramento remoto", "Alertas automáticos"],
     color: "#f5a623",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
-    benefits: [
-      { icon: TrendingUp, text: "Controle contínuo do fluxo" },
-      { icon: CheckCircle, text: "Estabilidade na operação" },
-      { icon: LinkIcon, text: "Integração com sistemas" }
-    ]
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80",
+    badge: "Novo"
   },
   {
     id: "pebe-2000",
     icon: Scale,
-    name: "Ensacadeira Eletrônica com Dosagem Automática para Big-Bags PEBE2000",
-    description: "Controle da dosagem com maior estabilidade no processo",
+    name: "Ensacadeira Big-Bags PEBE2000",
+    tagline: "Dosagem inteligente, resultados consistentes",
+    description: "Ensacadeira com dosagem automática para big-bags. Controle preciso da dosagem com estabilidade superior no processo.",
+    features: ["Dosagem automática adaptativa", "Estabilidade superior", "Integração com CLP", "Relatórios de produção"],
     color: "#1a3a5c",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
-    benefits: [
-      { icon: TrendingUp, text: "Controle preciso da dosagem" },
-      { icon: CheckCircle, text: "Estabilidade no processo" },
-      { icon: Zap, text: "Automação completa" }
-    ]
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80",
+    badge: null
   },
   {
     id: "peved-2060",
     icon: PackageCheck,
-    name: "Ensacadeira Eletrônica PEVED 2060",
-    description: "Versatilidade no ensaque para diferentes aplicações",
+    name: "Ensacadeira PEVED 2060",
+    tagline: "Versatilidade que se adapta ao seu negócio",
+    description: "Ensacadeira eletrônica de múltiplas aplicações. Versatilidade operacional para diferentes tipos de sacos e materiais.",
+    features: ["Múltiplos formatos de saco", "Troca rápida de matriz", "Painel touch screen", "Conexão USB para dados"],
     color: "#f5a623",
-    image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&q=80",
-    benefits: [
-      { icon: Zap, text: "Versatilidade operacional" },
-      { icon: AlertCircle, text: "Redução de retrabalho" },
-      { icon: LinkIcon, text: "Compatibilidade total" }
-    ]
+    image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1200&q=80",
+    badge: null
   }
 ];
+
+function FeaturedCarousel() {
+  const [current, setCurrent] = useState(0);
+  const navigate = useNavigate();
+  const IconComponent = products[current].icon;
+  
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % products.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="relative w-full h-[500px] lg:h-[600px] rounded-3xl overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.7 }}
+          className="absolute inset-0"
+        >
+          <img
+            src={products[current].image}
+            alt={products[current].name}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+          
+          <div className="absolute inset-0 flex items-center">
+            <div className="max-w-7xl mx-auto px-8 lg:px-16 w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="max-w-xl"
+              >
+                {products[current].badge && (
+                  <span className="inline-block px-4 py-1.5 text-xs font-bold text-white bg-[#f5a623] rounded-full mb-4">
+                    {products[current].badge}
+                  </span>
+                )}
+                <div 
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md mb-4"
+                  style={{ backgroundColor: `${products[current].color}E6` }}
+                >
+                  {IconComponent && <IconComponent className="w-4 h-4 text-white" />}
+                </div>
+                <h2 className="text-3xl lg:text-5xl text-white mb-3 leading-tight" style={{ fontWeight: 800 }}>
+                  {products[current].name}
+                </h2>
+                <p className="text-lg lg:text-xl text-white/90 mb-2" style={{ color: products[current].color }}>
+                  {products[current].tagline}
+                </p>
+                <p className="text-base text-white/70 mb-6 max-w-lg">
+                  {products[current].description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {products[current].features.slice(0, 3).map((feat, idx) => (
+                    <span key={idx} className="px-3 py-1 text-xs text-white bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                      {feat}
+                    </span>
+                  ))}
+                </div>
+                <GlowButton
+                  label="Conhecer solução"
+                  variant="primary"
+                  onClick={() => navigate(`/produto/${products[current].id}`)}
+                />
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3">
+        {products.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrent(idx)}
+            className={`h-2 rounded-full transition-all duration-300 ${idx === current ? 'w-8 bg-[#f5a623]' : 'w-2 bg-white/40 hover:bg-white/60'}`}
+          />
+        ))}
+      </div>
+
+      <button
+        onClick={() => setCurrent((prev) => (prev - 1 + products.length) % products.length)}
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+      >
+        <ChevronLeft className="w-6 h-6" />
+      </button>
+      <button
+        onClick={() => setCurrent((prev) => (prev + 1) % products.length)}
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+      >
+        <ChevronRight className="w-6 h-6" />
+      </button>
+    </div>
+  );
+}
+
+function ProductCard({ product, index, isInView }: { product: typeof products[0]; index: number; isInView: boolean }) {
+  const navigate = useNavigate();
+  const IconComponent = product.icon;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group relative cursor-pointer"
+      onClick={() => navigate(`/produto/${product.id}`)}
+      whileHover={{ y: -4 }}
+    >
+      <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+        <div className="relative h-56 overflow-hidden">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          
+          {product.badge && (
+            <div className="absolute top-4 right-4">
+              <span className="px-3 py-1 text-xs font-bold text-white bg-[#1a3a5c] rounded-full">
+                {product.badge}
+              </span>
+            </div>
+          )}
+
+          <div className="absolute top-4 left-4">
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md"
+              style={{ backgroundColor: `${product.color}E6` }}
+            >
+              {IconComponent && <IconComponent className="w-4 h-4 text-white" />}
+            </div>
+          </div>
+
+          <div className="absolute bottom-4 left-4 right-4">
+            <h3 className="text-lg font-bold text-white leading-tight">
+              {product.name}
+            </h3>
+          </div>
+        </div>
+
+        <div className="p-5">
+          <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+            {product.tagline}
+          </p>
+          
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: product.color }} />
+              <span className="text-xs text-gray-500 uppercase tracking-wide">Ver detalhes</span>
+            </div>
+            <motion.div
+              initial={{ x: 0 }}
+              whileHover={{ x: 4 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1a3a5c]/10 group-hover:bg-[#1a3a5c] transition-colors duration-300"
+            >
+              <ArrowRight className="w-4 h-4 text-[#1a3a5c] group-hover:text-white transition-colors duration-300" />
+            </motion.div>
+          </div>
+        </div>
+
+        <div
+          className="absolute bottom-0 right-0 w-24 h-24 opacity-0 group-hover:opacity-15 transition-opacity duration-500 pointer-events-none"
+          style={{ background: `radial-gradient(circle at bottom right, ${product.color}, transparent)` }}
+        />
+      </div>
+    </motion.div>
+  );
+}
 
 export function SolutionsPage() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -94,150 +263,101 @@ export function SolutionsPage() {
 
   return (
     <>
-      <section className="relative py-24 md:py-32 bg-white overflow-hidden">
-        {/* Tech Grid Background */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `linear-gradient(rgba(26, 58, 92, 0.15) 1px, transparent 1px),
-                             linear-gradient(90deg, rgba(26, 58, 92, 0.15) 1px, transparent 1px)`,
-            backgroundSize: '64px 64px'
-          }} />
-        </div>
-
-        <div ref={ref} className="relative max-w-7xl mx-auto px-6 lg:px-12">
-          {/* Section Header */}
+      <section className="relative py-16 md:py-24 bg-[#fafaf9] overflow-hidden">
+        <div ref={ref} className="relative max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16 md:mb-24"
+            transition={{ duration: 0.5 }}
+            className="text-center mb-10 md:mb-14"
           >
             <div className="inline-block mb-4">
-              <span className="text-[#f5a623] tracking-[0.3em] uppercase text-sm border-b border-[#f5a623]/30 pb-2" style={{ fontWeight: 600 }}>
+              <span className="text-[#f5a623] tracking-[0.2em] uppercase text-xs md:text-sm border-b border-[#f5a623]/30 pb-2" style={{ fontWeight: 600 }}>
                 Soluções Completas
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1a3a5c] mb-6 tracking-tight leading-tight" style={{ fontWeight: 800 }}>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl text-[#1a3a5c] mb-4 tracking-tight leading-tight" style={{ fontWeight: 800 }}>
               Todas as Nossas
-              <br />
-              <span className="bg-gradient-to-r from-[#1a3a5c] to-[#f5a623] bg-clip-text text-transparent">
-                Soluções
-              </span>
+              <span className="bg-gradient-to-r from-[#1a3a5c] to-[#f5a623] bg-clip-text text-transparent"> Soluções</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Conheça em detalhes todas as soluções Pondus e seus benefícios operacionais para sua indústria
+            <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+              Tecnologias que transformam operações industriais em resultados concretos
             </p>
           </motion.div>
 
-          {/* Products List with Benefits */}
-          <div className="space-y-12 md:space-y-16">
-            {products.map((product, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative bg-white rounded-2xl border-2 border-gray-200 hover:border-transparent overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
-              >
-                {/* Border Glow on Hover */}
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{
-                    border: `2px solid ${product.color}80`
-                  }}
-                />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <FeaturedCarousel />
+          </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {/* Image Section */}
-                  <div className="relative h-64 lg:h-auto overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-16 md:mt-20"
+          >
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl md:text-3xl text-[#1a3a5c]" style={{ fontWeight: 700 }}>
+                Todas as Soluções
+              </h2>
+              <div className="hidden md:flex items-center gap-2 text-sm text-gray-500">
+                <span className="w-2 h-2 rounded-full bg-[#f5a623]" />
+                <span>6 produtos</span>
+              </div>
+            </div>
 
-                    {/* Icon on Image */}
-                    <div className="absolute top-6 right-6">
-                      <motion.div
-                        whileHover={{ rotate: 5, scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div
-                          className="inline-flex p-4 rounded-xl backdrop-blur-sm"
-                          style={{ backgroundColor: `${product.color}90` }}
-                        >
-                          <product.icon
-                            className="w-8 h-8 text-white"
-                          />
-                        </div>
-                      </motion.div>
-                    </div>
-                  </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.map((product, index) => (
+                <ProductCard key={product.id} product={product} index={index} isInView={isInView} />
+              ))}
+            </div>
+          </motion.div>
 
-                  {/* Content Section */}
-                  <div className="p-8 md:p-10 flex flex-col justify-center">
-                    {/* Hover Glow Effect */}
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
-                      style={{
-                        background: `radial-gradient(circle at center, ${product.color}08, transparent 70%)`
-                      }}
-                    />
-
-                    <h2 className="text-2xl md:text-3xl text-[#1a3a5c] mb-4 leading-tight relative z-10" style={{ fontWeight: 700 }}>
-                      {product.name}
-                    </h2>
-                    <p className="text-gray-600 leading-relaxed text-base md:text-lg relative z-10 mb-6">
-                      {product.description}
-                    </p>
-
-                    {/* Benefits Section */}
-                    <div className="relative z-10">
-                      <h3 className="text-lg font-semibold mb-4" style={{ color: product.color }}>
-                        Benefícios Operacionais
-                      </h3>
-                      <div className="space-y-4">
-                        {product.benefits.map((benefit, idx) => (
-                          <motion.div
-                            key={idx}
-                            initial={{ x: -10, opacity: 0 }}
-                            animate={isInView ? { x: 0, opacity: 1 } : {}}
-                            transition={{ delay: (index * 0.1) + (idx * 0.1) }}
-                            className="flex items-start gap-4"
-                          >
-                            <div
-                              className="p-3 rounded-lg flex-shrink-0"
-                              style={{ backgroundColor: `${product.color}15` }}
-                            >
-                              <benefit.icon
-                                className="w-5 h-5"
-                                style={{ color: product.color }}
-                              />
-                            </div>
-                            <p
-                              className="text-base leading-relaxed pt-2"
-                              style={{ color: product.color }}
-                            >
-                              {benefit.text}
-                            </p>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-16 md:mt-20"
+          >
+            <div className="relative bg-[#1a3a5c] rounded-3xl p-8 md:p-12 overflow-hidden">
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0" style={{
+                  backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                                   linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                  backgroundSize: '40px 40px'
+                }} />
+              </div>
+              
+              <div className="relative flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div className="text-center lg:text-left">
+                  <h3 className="text-2xl md:text-3xl text-white mb-3" style={{ fontWeight: 700 }}>
+                    Precisa de ajuda para escolher?
+                  </h3>
+                  <p className="text-white/80 max-w-md">
+                    Nossa equipe de especialistas está pronta para indicar a melhor solução para sua operação
+                  </p>
                 </div>
-
-                {/* corner Accent */}
-                <div
-                  className="absolute bottom-0 right-0 w-32 h-32 opacity-10 group-hover:opacity-30 transition-opacity duration-500"
-                  style={{
-                    background: `radial-gradient(circle at bottom right, ${product.color}, transparent)`
-                  }}
-                />
-              </motion.div>
-            ))}
-          </div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <GlowButton
+                    label="Falar com especialista"
+                    variant="secondary"
+                    onClick={() => navigate('/contato')}
+                  />
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => navigate('/produto/pcsl-22000')}
+                    className="px-6 py-3 rounded-full border-2 border-white/30 text-white font-semibold hover:bg-white/10 transition-colors"
+                  >
+                    Ver produto destaque
+                  </motion.button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
