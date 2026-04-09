@@ -82,7 +82,7 @@ export function Contact() {
                 <MessageCircle className="w-10 h-10 text-white" />
               </div>
               <div className="text-center">
-                <p className="text-xl font-bold text-[#1a3a5c] mb-2" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                <p className="text-xl font-bold text-[#1a3a5c] mb-2 uppercase tracking-wide">
                   WhatsApp
                 </p>
                 <p className="text-sm text-gray-500">Resposta mais rápida</p>
@@ -100,7 +100,7 @@ export function Contact() {
                 <Mail className="w-10 h-10 text-white" />
               </div>
               <div className="text-center">
-                <p className="text-xl font-bold text-[#1a3a5c] mb-2" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                <p className="text-xl font-bold text-[#1a3a5c] mb-2 uppercase tracking-wide">
                   E-mail
                 </p>
                 <p className="text-sm text-gray-500">Solicitação formal</p>
@@ -133,7 +133,7 @@ export function Contact() {
                   <MessageCircle className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-white font-bold" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                  <p className="text-white font-bold uppercase tracking-wide">
                     WhatsApp
                   </p>
                   <p className="text-white/80 text-sm">Resposta em horário comercial</p>
@@ -194,7 +194,7 @@ export function Contact() {
                   <Mail className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-white font-bold" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                  <p className="text-white font-bold uppercase tracking-wide">
                     E-mail
                   </p>
                   <p className="text-white/80 text-sm">Respondemos em até 24h</p>

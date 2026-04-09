@@ -141,7 +141,7 @@ ${formData.message}`
                   className="p-8"
                 >
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl font-bold text-[#1a3a5c] mb-2" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                    <h3 className="text-2xl font-bold text-[#1a3a5c] mb-2 uppercase tracking-wide">
                       Solicitar Proposta
                     </h3>
                     <p className="text-gray-500 text-sm">
@@ -203,7 +203,7 @@ ${formData.message}`
                         <MessageCircle className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-white" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                        <h3 className="text-lg font-bold text-white uppercase tracking-wide">
                           WhatsApp
                         </h3>
                         <p className="text-white/80 text-xs">Resposta mais rápida</p>
@@ -367,7 +367,7 @@ ${formData.message}`
                       <div className="w-10 h-10 rounded-full bg-[#1a3a5c]/10 flex items-center justify-center">
                         <Mail className="w-5 h-5 text-[#1a3a5c]" />
                       </div>
-                      <h3 className="text-xl font-bold text-[#1a3a5c]" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                      <h3 className="text-xl font-bold text-[#1a3a5c] uppercase tracking-wide">
                         Via E-mail
                       </h3>
                     </div>
