@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
-import { Scale, Gauge, PackageCheck, Package, Boxes, CheckCircle, TrendingUp, Zap, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Scale, Gauge, PackageCheck, Package, Boxes, CheckCircle, TrendingUp, Zap, ArrowRight, ChevronLeft, ChevronRight, Hand } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../components/Contact";
 import { GlowButton } from "../components/ui/glow-button";
@@ -76,18 +76,56 @@ const products = [
 
 function FeaturedCarousel() {
   const [current, setCurrent] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [dragStart, setDragStart] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const IconComponent = products[current].icon;
   
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % products.length);
-    }, 6000);
+    }, 8000);
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
+
+  const handleInteraction = (action: () => void) => {
+    action();
+    setIsPaused(true);
+    setTimeout(() => setIsPaused(false), 10000);
+  };
+
+  const handleDragStart = (e: React.TouchEvent | React.MouseEvent) => {
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    setDragStart(clientX);
+  };
+
+  const handleDragEnd = (e: React.TouchEvent | React.MouseEvent) => {
+    if (dragStart === null) return;
+    const clientX = 'changedTouches' in e ? e.changedTouches[0].clientX : e.clientX;
+    const diff = dragStart - clientX;
+    
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        handleInteraction(() => setCurrent((prev) => (prev + 1) % products.length));
+      } else {
+        handleInteraction(() => setCurrent((prev) => (prev - 1 + products.length) % products.length));
+      }
+    }
+    setDragStart(null);
+  };
 
   return (
-    <div className="relative w-full h-[500px] lg:h-[600px] rounded-3xl overflow-hidden">
+    <div 
+      ref={containerRef}
+      className="relative w-full h-[420px] sm:h-[480px] md:h-[560px] lg:h-[600px] rounded-2xl md:rounded-3xl overflow-hidden select-none"
+      onTouchStart={handleDragStart}
+      onTouchEnd={handleDragEnd}
+      onMouseDown={handleDragStart}
+      onMouseUp={handleDragEnd}
+      onMouseLeave={() => setDragStart(null)}
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -102,76 +140,97 @@ function FeaturedCarousel() {
             alt={products[current].name}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/40" />
           
-          <div className="absolute inset-0 flex items-center">
-            <div className="max-w-7xl mx-auto px-8 lg:px-16 w-full">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="max-w-xl"
-              >
-                {products[current].badge && (
-                  <span className="inline-block px-4 py-1.5 text-xs font-bold text-white bg-[#f5a623] rounded-full mb-4">
-                    {products[current].badge}
+          <div className="absolute inset-0 flex flex-col justify-end pb-20 sm:pb-24 md:pb-28 px-6 sm:px-8 lg:px-16">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="max-w-xl"
+            >
+              {products[current].badge && (
+                <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-[#f5a623] rounded-full mb-3 sm:mb-4">
+                  {products[current].badge}
+                </span>
+              )}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white mb-2 sm:mb-3 leading-tight" style={{ fontWeight: 800 }}>
+                {products[current].name}
+              </h2>
+              <p className="text-base sm:text-lg lg:text-xl mb-3 sm:mb-4 font-medium" style={{ color: '#f5a623' }}>
+                {products[current].tagline}
+              </p>
+              <p className="text-sm sm:text-base text-white/80 mb-4 sm:mb-6 max-w-lg hidden sm:block line-clamp-2">
+                {products[current].description}
+              </p>
+              <div className="hidden sm:flex flex-wrap gap-2 mb-4 sm:mb-6">
+                {products[current].features.slice(0, 3).map((feat, idx) => (
+                  <span key={idx} className="px-3 py-1 text-xs text-white bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                    {feat}
                   </span>
-                )}
-                <div 
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md mb-4"
-                  style={{ backgroundColor: `${products[current].color}E6` }}
-                >
-                  {IconComponent && <IconComponent className="w-4 h-4 text-white" />}
-                </div>
-                <h2 className="text-3xl lg:text-5xl text-white mb-3 leading-tight" style={{ fontWeight: 800 }}>
-                  {products[current].name}
-                </h2>
-                <p className="text-lg lg:text-xl text-white/90 mb-2" style={{ color: products[current].color }}>
-                  {products[current].tagline}
-                </p>
-                <p className="text-base text-white/70 mb-6 max-w-lg">
-                  {products[current].description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {products[current].features.slice(0, 3).map((feat, idx) => (
-                    <span key={idx} className="px-3 py-1 text-xs text-white bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-                      {feat}
-                    </span>
-                  ))}
-                </div>
-                <GlowButton
-                  label="Conhecer solução"
-                  variant="primary"
-                  onClick={() => navigate(`/produto/${products[current].id}`)}
-                />
-              </motion.div>
+                ))}
+              </div>
+              <GlowButton
+                label="Ver detalhes"
+                variant="primary"
+                onClick={() => navigate(`/produto/${products[current].id}`)}
+              />
+            </motion.div>
+          </div>
+
+          <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md"
+              style={{ backgroundColor: `${products[current].color}E6` }}
+            >
+              {IconComponent && <IconComponent className="w-4 h-4 text-white" />}
+              <span className="text-xs sm:text-sm font-semibold text-white">{products[current].name.split(' ')[0]}</span>
             </div>
+            <div className="flex items-center gap-2">
+              {isPaused && (
+                <span className="px-3 py-1 text-xs text-white bg-black/40 rounded-full backdrop-blur-sm flex items-center gap-1.5">
+                  <motion.div
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <Hand className="w-3 h-3" />
+                  </motion.div>
+                  Arraste
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between">
+            <button
+              onClick={() => handleInteraction(() => setCurrent((prev) => (prev - 1 + products.length) % products.length))}
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+
+            <div className="flex items-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md">
+              <span className="text-white/60 text-xs">{current + 1}/{products.length}</span>
+              <div className="flex items-center gap-2 sm:gap-3">
+                {products.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleInteraction(() => setCurrent(idx))}
+                    className={`h-2 rounded-full transition-all duration-300 ${idx === current ? 'w-6 sm:w-8 bg-[#f5a623]' : 'w-2 bg-white/40 hover:bg-white/60'}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <button
+              onClick={() => handleInteraction(() => setCurrent((prev) => (prev + 1) % products.length))}
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
           </div>
         </motion.div>
       </AnimatePresence>
-
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3">
-        {products.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrent(idx)}
-            className={`h-2 rounded-full transition-all duration-300 ${idx === current ? 'w-8 bg-[#f5a623]' : 'w-2 bg-white/40 hover:bg-white/60'}`}
-          />
-        ))}
-      </div>
-
-      <button
-        onClick={() => setCurrent((prev) => (prev - 1 + products.length) % products.length)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
-        onClick={() => setCurrent((prev) => (prev + 1) % products.length)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
     </div>
   );
 }
@@ -297,19 +356,22 @@ export function SolutionsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-16 md:mt-20"
+            className="mt-12 md:mt-20"
           >
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl md:text-3xl text-[#1a3a5c]" style={{ fontWeight: 700 }}>
-                Todas as Soluções
-              </h2>
+            <div className="flex items-center justify-between mb-6 md:mb-8">
+              <div className="flex items-center gap-3">
+                <div className="w-1.5 h-8 md:h-10 bg-gradient-to-b from-[#f5a623] to-[#1a3a5c] rounded-full" />
+                <h2 className="text-xl sm:text-2xl md:text-3xl text-[#1a3a5c]" style={{ fontWeight: 700 }}>
+                  Nossas Soluções
+                </h2>
+              </div>
               <div className="hidden md:flex items-center gap-2 text-sm text-gray-500">
                 <span className="w-2 h-2 rounded-full bg-[#f5a623]" />
                 <span>6 produtos</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {products.map((product, index) => (
                 <ProductCard key={product.id} product={product} index={index} isInView={isInView} />
               ))}
