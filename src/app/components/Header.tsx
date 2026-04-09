@@ -129,9 +129,13 @@ export function Header() {
                       onMouseEnter={() => setSolutionsDropdownOpen(true)}
                       onClick={() => navigate('/solucoes')}
                     >
-                      <span>Soluções</span>
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${solutionsDropdownOpen ? 'rotate-180' : ''}`} />
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#1a3a5c] to-[#f5a623] group-hover:w-full transition-all duration-300" />
+                      <span className="relative">
+                        <span className="bg-gradient-to-r from-[#1a3a5c] to-[#f5a623] bg-clip-text text-transparent font-bold">
+                          Soluções
+                        </span>
+                        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-[#1a3a5c] to-[#f5a623]" />
+                      </span>
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${solutionsDropdownOpen ? 'rotate-180' : ''} text-[#f5a623]`} />
                     </motion.div>
 
                     <AnimatePresence>
@@ -260,9 +264,10 @@ export function Header() {
                       initial={{ x: -20, opacity: 0 }}
                       animate={mobileMenuOpen ? { x: 0, opacity: 1 } : {}}
                       transition={{ delay: index * 0.05 }}
-                      className={baseClasses}
+                      className="flex items-center justify-between block bg-gradient-to-r from-[#1a3a5c] to-[#f5a623] text-white font-bold text-sm tracking-wide uppercase py-3 px-4 rounded-lg shadow-lg"
                     >
-                      {link.name}
+                      <span>{link.name}</span>
+                      <span className="bg-white/20 px-2 py-1 rounded text-xs">6 produtos</span>
                     </motion.div>
                   </Link>
                   <div className="ml-4 space-y-1">
