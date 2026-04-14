@@ -2,68 +2,93 @@ import { motion } from "motion/react";
 import { useInView } from "motion/react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Scale, Gauge, PackageCheck, Package, Boxes } from "lucide-react";
 import { GlowButton } from "./ui/glow-button";
+import { products, getEnsacadeiras, getBalancas, getContadoras, getIconByName } from "../../data/products";
 
-const products = [
-  {
-    id: "pcsl-22000",
-    icon: PackageCheck,
-    name: "Contadora de Sementes PCSL 22000",
-    description: "Controle e padronização de lotes com redução de falhas operacionais",
-    color: "#1a3a5c",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80"
-  },
-  {
-    id: "pebbag-1500",
-    icon: Boxes,
-    name: "Ensacadeira Eletrônica Automática para Big-Bags PEBBAG 1500",
-    description: "Automação no ensaque com ganho de produtividade e padronização",
-    color: "#f5a623",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80"
-  },
-  {
-    id: "pevps-2060",
-    icon: Package,
-    name: "Ensacadeira Eletrônica de Sopro para Sacos Valvulados PEVPS 2060",
-    description: "Eficiência no ensaque com melhor desempenho operacional",
-    color: "#1a3a5c",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80"
-  },
-  {
-    id: "pfd-30t",
-    icon: Gauge,
-    name: "Balança de Fluxo para Sementes e Grãos PFD 30T",
-    description: "Controle contínuo do fluxo com estabilidade na operação",
-    color: "#f5a623",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80"
-  },
-  {
-    id: "pebe-2000",
-    icon: Scale,
-    name: "Ensacadeira Eletrônica com Dosagem Automática para Big-Bags PEBE2000",
-    description: "Controle da dosagem com maior estabilidade no processo",
-    color: "#1a3a5c",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
-  },
-  {
-    id: "peved-2060",
-    icon: PackageCheck,
-    name: "Ensacadeira Eletrônica PEVED 2060",
-    description: "Versatilidade no ensaque para diferentes aplicações",
-    color: "#f5a623",
-    image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&q=80"
-  }
-];
+function ProductCard({ product, index, isInView }: { product: typeof products[0]; index: number; isInView: boolean }) {
+  const navigate = useNavigate();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      className="group relative bg-white rounded-2xl border-2 border-gray-200 hover:border-transparent overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
+      whileHover={{ y: -4, scale: 1.01 }}
+      onClick={() => navigate(`/produto/${product.id}`)}
+    >
+      <div className="relative h-48 overflow-hidden">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+
+        <div className="absolute top-4 right-4">
+          <motion.div
+            whileHover={{ rotate: 5, scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div
+              className="inline-flex p-3 rounded-xl backdrop-blur-sm"
+              style={{ backgroundColor: `${product.color}90` }}
+            >
+              {(() => {
+                const Icon = getIconByName(product.iconName);
+                return <Icon className="w-6 h-6 text-white" />;
+              })()}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="p-8">
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at center, ${product.color}08, transparent 70%)`
+          }}
+        />
+
+        <div
+          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            border: `2px solid ${product.color}80`
+          }}
+        />
+
+        <h3 className="text-lg md:text-xl text-[#1a3a5c] mb-3 leading-tight relative z-10" style={{ fontWeight: 700 }}>
+          {product.name}
+        </h3>
+        <p className="text-gray-600 leading-relaxed text-sm md:text-base relative z-10">
+          {product.shortDescription}
+        </p>
+
+        <div
+          className="absolute bottom-0 right-0 w-20 h-20 opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+          style={{
+            background: `radial-gradient(circle at bottom right, ${product.color}, transparent)`
+          }}
+        />
+      </div>
+    </motion.div>
+  );
+}
 
 export function Products() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const navigate = useNavigate();
 
+  const ensacadeiras = getEnsacadeiras();
+  const balancas = getBalancas();
+  const contadoras = getContadoras();
+
+  let globalIndex = 0;
+
   return (
     <section id="solucoes" className="relative py-24 md:py-32 bg-white overflow-hidden">
-      {/* Tech Grid Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: `linear-gradient(rgba(26, 58, 92, 0.15) 1px, transparent 1px),
@@ -97,87 +122,104 @@ export function Products() {
           </p>
         </motion.div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
-          {products.map((product, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="group relative bg-white rounded-2xl border-2 border-gray-200 hover:border-transparent overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
-              whileHover={{ y: -4, scale: 1.01 }}
-              onClick={() => navigate(`/produto/${product.id}`)}
-            >
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        {/* Ensacadeiras Section */}
+        {ensacadeiras.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-16 md:mb-24"
+          >
+            <div className="text-center mb-8 md:mb-12">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl text-[#1a3a5c] mb-4 tracking-tight" style={{ fontWeight: 800 }}>
+                Nossas
+                <span className="text-[#f5a623]"> Ensacadeiras</span>
+              </h3>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Equipamentos para pesagem e embalagem de produtos a granel com precisão e eficiência
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {ensacadeiras.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  index={globalIndex++}
+                  isInView={isInView}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+              ))}
+            </div>
+          </motion.div>
+        )}
 
-                {/* Icon on Image */}
-                <div className="absolute top-4 right-4">
-                  <motion.div
-                    whileHover={{ rotate: 5, scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div
-                      className="inline-flex p-3 rounded-xl backdrop-blur-sm"
-                      style={{ backgroundColor: `${product.color}90` }}
-                    >
-                      <product.icon
-                        className="w-6 h-6 text-white"
-                      />
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
+        {/* Balancas Section */}
+        {balancas.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-16 md:mb-24"
+          >
+            <div className="text-center mb-8 md:mb-12">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl text-[#1a3a5c] mb-4 tracking-tight" style={{ fontWeight: 800 }}>
+                Nossas
+                <span className="text-[#f5a623]"> Balanças</span>
+              </h3>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Balanças de fluxo e expedição para medição precisa em processos industriais
+              </p>
+            </div>
 
-              {/* Content */}
-              <div className="p-8">
-                {/* Hover Glow Effect */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
-                  style={{
-                    background: `radial-gradient(circle at center, ${product.color}08, transparent 70%)`
-                  }}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {balancas.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  index={globalIndex++}
+                  isInView={isInView}
                 />
+              ))}
+            </div>
+          </motion.div>
+        )}
 
-                {/* Border Glow */}
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{
-                    border: `2px solid ${product.color}80`
-                  }}
+        {/* Contadoras Section */}
+        {contadoras.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-16 md:mb-24"
+          >
+            <div className="text-center mb-8 md:mb-12">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl text-[#1a3a5c] mb-4 tracking-tight" style={{ fontWeight: 800 }}>
+                Nossas
+                <span className="text-[#f5a623]"> Contadoras</span>
+              </h3>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Contagem de sementes com tecnologia de imagem e alta precisão
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {contadoras.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  index={globalIndex++}
+                  isInView={isInView}
                 />
-
-                <h3 className="text-lg md:text-xl text-[#1a3a5c] mb-3 leading-tight relative z-10" style={{ fontWeight: 700 }}>
-                  {product.name}
-                </h3>
-                <p className="text-gray-600 leading-relaxed text-sm md:text-base relative z-10">
-                  {product.description}
-                </p>
-
-                {/* Corner Accent */}
-                <div
-                  className="absolute bottom-0 right-0 w-20 h-20 opacity-10 group-hover:opacity-30 transition-opacity duration-500"
-                  style={{
-                    background: `radial-gradient(circle at bottom right, ${product.color}, transparent)`
-                  }}
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         {/* CTA Final */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center pt-8"
         >
           <motion.div

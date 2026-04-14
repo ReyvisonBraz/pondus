@@ -1,78 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
-import { Scale, Gauge, PackageCheck, Package, Boxes, CheckCircle, TrendingUp, Zap, ArrowRight, ChevronLeft, ChevronRight, Hand } from "lucide-react";
+import { ChevronLeft, ChevronRight, Hand, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../components/Contact";
 import { GlowButton } from "../components/ui/glow-button";
-
-const products = [
-  {
-    id: "pcsl-22000",
-    icon: PackageCheck,
-    name: "Contadora de Sementes PCSL 22000",
-    tagline: "Precisão que transforma sua produção",
-    description: "Sistema de contagem de alta precisão para sementes e grãos. Elimina falhas operacionais e garante padronização completa dos lotes.",
-    features: ["Contagem precisa por lote", "Redução de retrabalho", "Interface intuitiva", "Relatórios em tempo real"],
-    color: "#1a3a5c",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&q=80",
-    badge: "Mais Vendida"
-  },
-  {
-    id: "pebbag-1500",
-    icon: Boxes,
-    name: "Ensacadeira Big-Bags PEBBAG 1500",
-    tagline: "Automação que acelera sua expedição",
-    description: "Ensacadeira automática para big-bags com ganho de produtividade de até 40%. Integração direta com linhas de produção existentes.",
-    features: ["Capacidade de 500kg a 2000kg", "Velocidade de até 120 big-bags/hora", "Calibragem automática", "Sistema de pesagem integrado"],
-    color: "#f5a623",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80",
-    badge: null
-  },
-  {
-    id: "pevps-2060",
-    icon: Package,
-    name: "Ensacadeira de Sopro PEVPS 2060",
-    tagline: "Eficiência em cada sopro",
-    description: "Sistema de ensaque por sopro para sacos valvulados. Maximiza a eficiência operacional com controle preciso de peso.",
-    features: [" وزن دقيق لكل كيس", "Velocidade ajustável", "Baixo consumo de energia", "Manutenção simplificada"],
-    color: "#1a3a5c",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200&q=80",
-    badge: null
-  },
-  {
-    id: "pfd-30t",
-    icon: Gauge,
-    name: "Balança de Fluxo PFD 30T",
-    tagline: "Controle contínuo, estabilidade total",
-    description: "Balança de fluxo para sementes e grãos com controle contínuo. Estabilidade operacional 24/7 com monitoramento remoto.",
-    features: ["Capacidade de 30 toneladas/hora", "Precisão de ±0.1%", "Monitoramento remoto", "Alertas automáticos"],
-    color: "#f5a623",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80",
-    badge: "Novo"
-  },
-  {
-    id: "pebe-2000",
-    icon: Scale,
-    name: "Ensacadeira Big-Bags PEBE2000",
-    tagline: "Dosagem inteligente, resultados consistentes",
-    description: "Ensacadeira com dosagem automática para big-bags. Controle preciso da dosagem com estabilidade superior no processo.",
-    features: ["Dosagem automática adaptativa", "Estabilidade superior", "Integração com CLP", "Relatórios de produção"],
-    color: "#1a3a5c",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80",
-    badge: null
-  },
-  {
-    id: "peved-2060",
-    icon: PackageCheck,
-    name: "Ensacadeira PEVED 2060",
-    tagline: "Versatilidade que se adapta ao seu negócio",
-    description: "Ensacadeira eletrônica de múltiplas aplicações. Versatilidade operacional para diferentes tipos de sacos e materiais.",
-    features: ["Múltiplos formatos de saco", "Troca rápida de matriz", "Painel touch screen", "Conexão USB para dados"],
-    color: "#f5a623",
-    image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1200&q=80",
-    badge: null
-  }
-];
+import { products, getIconByName } from "../../data/products";
 
 function FeaturedCarousel() {
   const [current, setCurrent] = useState(0);
@@ -80,8 +12,7 @@ function FeaturedCarousel() {
   const [dragStart, setDragStart] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const IconComponent = products[current].icon;
-  
+
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
@@ -105,7 +36,7 @@ function FeaturedCarousel() {
     if (dragStart === null) return;
     const clientX = 'changedTouches' in e ? e.changedTouches[0].clientX : e.clientX;
     const diff = dragStart - clientX;
-    
+
     if (Math.abs(diff) > 50) {
       if (diff > 0) {
         handleInteraction(() => setCurrent((prev) => (prev + 1) % products.length));
@@ -116,8 +47,11 @@ function FeaturedCarousel() {
     setDragStart(null);
   };
 
+  const currentProduct = products[current];
+  const IconComponent = getIconByName(currentProduct.iconName);
+
   return (
-    <div 
+    <div
       ref={containerRef}
       className="relative w-full h-[420px] sm:h-[480px] md:h-[560px] lg:h-[600px] rounded-2xl md:rounded-3xl overflow-hidden select-none"
       onTouchStart={handleDragStart}
@@ -136,12 +70,12 @@ function FeaturedCarousel() {
           className="absolute inset-0"
         >
           <img
-            src={products[current].image}
-            alt={products[current].name}
+            src={currentProduct.image}
+            alt={currentProduct.name}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/40" />
-          
+
           <div className="absolute inset-0 flex flex-col justify-end pb-20 sm:pb-24 md:pb-28 px-6 sm:px-8 lg:px-16">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -149,31 +83,16 @@ function FeaturedCarousel() {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="max-w-xl"
             >
-              {products[current].badge && (
-                <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-[#f5a623] rounded-full mb-3 sm:mb-4">
-                  {products[current].badge}
-                </span>
-              )}
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white mb-2 sm:mb-3 leading-tight" style={{ fontWeight: 800 }}>
-                {products[current].name}
+                {currentProduct.name}
               </h2>
-              <p className="text-base sm:text-lg lg:text-xl mb-3 sm:mb-4 font-medium" style={{ color: '#f5a623' }}>
-                {products[current].tagline}
+              <p className="text-sm sm:text-base text-white/80 mb-4 sm:mb-6 max-w-lg line-clamp-2">
+                {currentProduct.description}
               </p>
-              <p className="text-sm sm:text-base text-white/80 mb-4 sm:mb-6 max-w-lg hidden sm:block line-clamp-2">
-                {products[current].description}
-              </p>
-              <div className="hidden sm:flex flex-wrap gap-2 mb-4 sm:mb-6">
-                {products[current].features.slice(0, 3).map((feat, idx) => (
-                  <span key={idx} className="px-3 py-1 text-xs text-white bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-                    {feat}
-                  </span>
-                ))}
-              </div>
               <GlowButton
                 label="Ver detalhes"
                 variant="primary"
-                onClick={() => navigate(`/produto/${products[current].id}`)}
+                onClick={() => navigate(`/produto/${currentProduct.id}`)}
               />
             </motion.div>
           </div>
@@ -181,10 +100,10 @@ function FeaturedCarousel() {
           <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
             <div
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md"
-              style={{ backgroundColor: `${products[current].color}E6` }}
+              style={{ backgroundColor: `${currentProduct.color}E6` }}
             >
               {IconComponent && <IconComponent className="w-4 h-4 text-white" />}
-              <span className="text-xs sm:text-sm font-semibold text-white">{products[current].name.split(' ')[0]}</span>
+              <span className="text-xs sm:text-sm font-semibold text-white">{currentProduct.name.split(' ')[0]}</span>
             </div>
             <div className="flex items-center gap-2">
               {isPaused && (
@@ -237,7 +156,7 @@ function FeaturedCarousel() {
 
 function ProductCard({ product, index, isInView }: { product: typeof products[0]; index: number; isInView: boolean }) {
   const navigate = useNavigate();
-  const IconComponent = product.icon;
+  const IconComponent = getIconByName(product.iconName);
 
   return (
     <motion.div
@@ -256,14 +175,6 @@ function ProductCard({ product, index, isInView }: { product: typeof products[0]
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-          
-          {product.badge && (
-            <div className="absolute top-4 right-4">
-              <span className="px-3 py-1 text-xs font-bold text-white bg-[#1a3a5c] rounded-full">
-                {product.badge}
-              </span>
-            </div>
-          )}
 
           <div className="absolute top-4 left-4">
             <div
@@ -283,9 +194,9 @@ function ProductCard({ product, index, isInView }: { product: typeof products[0]
 
         <div className="p-5">
           <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-            {product.tagline}
+            {product.shortDescription}
           </p>
-          
+
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: product.color }} />
@@ -367,7 +278,7 @@ export function SolutionsPage() {
               </div>
               <div className="hidden md:flex items-center gap-2 text-sm text-gray-500">
                 <span className="w-2 h-2 rounded-full bg-[#f5a623]" />
-                <span>6 produtos</span>
+                <span>{products.length} produtos</span>
               </div>
             </div>
 
@@ -392,7 +303,7 @@ export function SolutionsPage() {
                   backgroundSize: '40px 40px'
                 }} />
               </div>
-              
+
               <div className="relative flex flex-col lg:flex-row items-center justify-between gap-8">
                 <div className="text-center lg:text-left">
                   <h3 className="text-2xl md:text-3xl text-white mb-3" style={{ fontWeight: 700 }}>
@@ -411,10 +322,10 @@ export function SolutionsPage() {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => navigate('/produto/pcsl-22000')}
+                    onClick={() => navigate('/contato')}
                     className="px-6 py-3 rounded-full border-2 border-white/30 text-white font-semibold hover:bg-white/10 transition-colors"
                   >
-                    Ver produto destaque
+                    Solicitar proposta
                   </motion.button>
                 </div>
               </div>

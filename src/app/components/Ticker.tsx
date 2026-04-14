@@ -1,14 +1,13 @@
 import { motion } from "motion/react";
 
 const tickerItems = [
-  "Sementes",
-  "Fertilizantes",
-  "Grãos",
-  "Materiais granulares",
-  "Pesagem industrial",
-  "Contagem de sementes",
+  "Balanças de fluxo",
+  "Sistema de expedição a granel",
+  "Ensacadeira de Sopro",
+  "Contadora de Sementes",
   "Ensacadeiras",
-  "Balanças de fluxo"
+  "Ensacadeira Big Bag",
+  "Ensacadeira para Rações"
 ];
 
 export function Ticker() {
