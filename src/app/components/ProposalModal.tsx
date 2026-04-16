@@ -96,7 +96,7 @@ Mensagem:
 ${formData.message}`
     );
     
-    window.location.href = `mailto:contato@pondus.com.br?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:contato@pondusrs.com.br?subject=${subject}&body=${body}`;
     onClose();
   };
 
@@ -375,7 +375,7 @@ ${formData.message}`
 
                   <div className="bg-[#f6f7f8] rounded-xl p-6 mb-6">
                     <p className="text-sm text-gray-600 leading-relaxed">
-                      Sua mensagem será enviada para <span className="font-semibold text-[#1a3a5c]">contato@pondus.com.br</span>
+                      Sua mensagem será enviada para <span className="font-semibold text-[#1a3a5c]">contato@pondusrs.com.br</span>
                     </p>
                   </div>
 

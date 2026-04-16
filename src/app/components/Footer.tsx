@@ -73,7 +73,7 @@ export function Footer() {
             {/* Social Media */}
             <div className="flex gap-3">
               {[
-                { icon: Youtube, href: "#", label: "YouTube" },
+                { icon: Youtube, href: "https://www.youtube.com/@Pondus2022", label: "YouTube" },
                 { icon: Linkedin, href: "#", label: "LinkedIn" },
                 { icon: Instagram, href: "#", label: "Instagram" }
               ].map((social, index) => (
@@ -130,20 +130,24 @@ export function Footer() {
             </h4>
             <ul className="space-y-3">
               {[
-                "Contadora de Sementes",
-                "Ensacadeira para Big-Bags",
-                "Ensacadeira de Sopro",
-                "Balança de Fluxo"
+                { name: "Contadora de Sementes", href: "/produto/contadora-sementes-pcsl" },
+                { name: "Ensacadeira para Big-Bags", href: "/produto/big-bag" },
+                { name: "Ensacadeira de Sopro", href: "/produto/ensacadeira-sopro-pevps" },
+                { name: "Balança de Fluxo", href: "/produto/balanca-fluxo-pfd" },
+                { name: "Ensacadeira Gravimétrica", href: "/produto/ensacadeira-gravimetrica-pevpd" },
+                { name: "Ensacadeira para Ração", href: "/produto/ensacadeira-racao-pevprd" },
+                { name: "Balança de Expedição", href: "/produto/balanca-expedicao-ppcd" },
+                { name: "Big-Bag Básica", href: "/produto/big-bag-basica-pebe" },
+                { name: "Big-Bag Automática", href: "/produto/big-bag-automatica-pebbag" }
               ].map((product, index) => (
                 <li key={index}>
                   <motion.a
-                    href="#solucoes"
-                    onClick={(e) => handleNavClick(e, '#solucoes')}
+                    href={product.href}
                     whileHover={{ x: 4 }}
                     transition={{ duration: 0.2 }}
                     className="text-gray-300 hover:text-[#f5a623] transition-colors duration-200 inline-block text-sm md:text-base"
                   >
-                    {product}
+                    {product.name}
                   </motion.a>
                 </li>
               ))}

@@ -7,7 +7,7 @@ export function WhatsAppButton() {
 
   return (
     <motion.a
-      href="https://wa.me/5555999900799?text=Olá! Gostaria de saber mais sobre as soluções da Pondus Tecnologia Industrial."
+      href="https://wa.me/555599900799?text=Olá! Gostaria de saber mais sobre as soluções da Pondus Tecnologia Industrial."
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}

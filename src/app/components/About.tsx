@@ -109,7 +109,7 @@ export function About() {
               Missão
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              Desenvolver soluções que aumentem o controle e a eficiência dos processos industriais, com foco em qualidade, confiabilidade e desempenho operacional.
+              Desenvolver soluções que aumentem o controle, a precisão e a eficiência dos processos industriais, com foco em qualidade, confiabilidade e desempenho operacional.
             </p>
           </div>
 

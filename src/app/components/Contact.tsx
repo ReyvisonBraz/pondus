@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { MessageCircle, Mail, Phone, MapPin, Clock, ArrowLeft, Copy, Check } from "lucide-react";
 
 const WHATSAPP_NUMBER = "5599900799";
-const EMAIL = "dutra@pondusrs.com.br";
+const EMAIL = "contato@pondusrs.com.br";
 
 export function Contact() {
   const ref = useRef(null);
@@ -86,7 +86,7 @@ export function Contact() {
                   WhatsApp
                 </p>
                 <p className="text-sm text-gray-500">Resposta mais rápida</p>
-                <p className="text-xs text-[#25D366] mt-2 font-medium">(11) 99900-7999</p>
+                <p className="text-xs text-[#25D366] mt-2 font-medium">+55 (55) 99900-0799</p>
               </div>
             </motion.button>
 
@@ -149,7 +149,7 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Número</p>
-                    <p className="text-lg font-bold text-[#1a3a5c]">(11) 99900-7999</p>
+                    <p className="text-lg font-bold text-[#1a3a5c]">+55 (55) 99900-0799</p>
                   </div>
                 </div>
 
@@ -233,7 +233,7 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Endereço</p>
-                    <p className="text-base font-bold text-[#1a3a5c]">São Paulo, SP - Brasil</p>
+                    <p className="text-base font-bold text-[#1a3a5c]">Ijuí – RS, CEP 98700-000</p>
                   </div>
                 </div>
 
