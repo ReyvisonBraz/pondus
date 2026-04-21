@@ -8,11 +8,30 @@ export function EquipmentShowcase() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
 
-  const openLightbox = (index: number) => setLightboxIndex(index);
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setShowSwipeHint(true);
+    setTimeout(() => setShowSwipeHint(false), 2500);
+  };
   const closeLightbox = () => setLightboxIndex(null);
   const nextImage = () => setLightboxIndex((prev) => prev !== null ? (prev + 1) % equipmentImages.length : 0);
   const prevImage = () => setLightboxIndex((prev) => prev !== null ? (prev - 1 + equipmentImages.length) % equipmentImages.length : 0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const diff = touchStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      diff > 0 ? nextImage() : prevImage();
+    }
+    setTouchStart(null);
+  };
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -169,21 +188,46 @@ export function EquipmentShowcase() {
               <X className="w-5 h-5" />
             </button>
 
-            {/* Navigation */}
-            <button
+            {/* Navigation arrows — pulsam nas primeiras exibições */}
+            <motion.button
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
-              className="absolute left-3 md:left-8 w-11 h-11 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white/80 hover:text-white transition-all z-20"
+              className="absolute left-3 md:left-8 w-12 h-12 bg-white/15 hover:bg-[#f5a623] rounded-full flex items-center justify-center text-white transition-colors duration-300 z-20 backdrop-blur-sm border border-white/20 hover:border-[#f5a623]"
+              animate={{ x: [0, -5, 0] }}
+              transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+              whileHover={{ scale: 1.12, x: 0 }}
+              whileTap={{ scale: 0.92 }}
             >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
+              <ChevronLeft className="w-6 h-6" />
+            </motion.button>
+            <motion.button
               onClick={(e) => { e.stopPropagation(); nextImage(); }}
-              className="absolute right-3 md:right-8 w-11 h-11 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white/80 hover:text-white transition-all z-20"
+              className="absolute right-3 md:right-8 w-12 h-12 bg-white/15 hover:bg-[#f5a623] rounded-full flex items-center justify-center text-white transition-colors duration-300 z-20 backdrop-blur-sm border border-white/20 hover:border-[#f5a623]"
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+              whileHover={{ scale: 1.12, x: 0 }}
+              whileTap={{ scale: 0.92 }}
             >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+              <ChevronRight className="w-6 h-6" />
+            </motion.button>
 
-            {/* Image container */}
+            {/* Swipe hint — mobile only, some after open */}
+            <AnimatePresence>
+              {showSwipeHint && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="absolute bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 md:hidden z-20 pointer-events-none"
+                >
+                  <ChevronLeft className="w-4 h-4 text-white/60" />
+                  <span className="text-white/60 text-xs tracking-wide">deslize para navegar</span>
+                  <ChevronRight className="w-4 h-4 text-white/60" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Image container — swipe area */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={lightboxIndex}
@@ -193,6 +237,8 @@ export function EquipmentShowcase() {
                 transition={{ duration: 0.25 }}
                 className="max-w-5xl w-full mx-4 md:mx-8"
                 onClick={(e) => e.stopPropagation()}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
               >
                 <img
                   src={equipmentImages[lightboxIndex].src}

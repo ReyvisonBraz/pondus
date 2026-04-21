@@ -274,7 +274,6 @@ function CategorySection({ icon, title, subtitle, description, accentColor, prod
 export function SolutionsPage() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -419,49 +418,6 @@ export function SolutionsPage() {
             />
           </div>
 
-          {/* CTA Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="mt-8"
-          >
-            <div className="relative bg-[#1a3a5c] rounded-3xl p-8 md:p-12 overflow-hidden">
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                                   linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                  backgroundSize: '40px 40px'
-                }} />
-              </div>
-
-              <div className="relative flex flex-col lg:flex-row items-center justify-between gap-8">
-                <div className="text-center lg:text-left">
-                  <h3 className="text-2xl md:text-3xl text-white mb-3" style={{ fontWeight: 700 }}>
-                    Precisa de ajuda para escolher?
-                  </h3>
-                  <p className="text-white/80 max-w-md">
-                    Nossa equipe de especialistas está pronta para indicar a melhor solução para sua operação
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <GlowButton
-                    label="Falar com especialista"
-                    variant="secondary"
-                    onClick={() => navigate('/contato')}
-                  />
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => navigate('/contato')}
-                    className="px-6 py-3 rounded-full border-2 border-white/30 text-white font-semibold hover:bg-white/10 transition-colors"
-                  >
-                    Solicitar proposta
-                  </motion.button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 

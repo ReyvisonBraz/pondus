@@ -141,14 +141,18 @@ export function Footer() {
                 { name: "Big-Bag Automática", href: "/produto/big-bag-automatica-pebbag" }
               ].map((product, index) => (
                 <li key={index}>
-                  <motion.a
-                    href={product.href}
+                  <motion.div
                     whileHover={{ x: 4 }}
                     transition={{ duration: 0.2 }}
-                    className="text-gray-300 hover:text-[#f5a623] transition-colors duration-200 inline-block text-sm md:text-base"
+                    className="inline-block"
                   >
-                    {product.name}
-                  </motion.a>
+                    <Link
+                      to={product.href}
+                      className="text-gray-300 hover:text-[#f5a623] transition-colors duration-200 text-sm md:text-base"
+                    >
+                      {product.name}
+                    </Link>
+                  </motion.div>
                 </li>
               ))}
             </ul>
