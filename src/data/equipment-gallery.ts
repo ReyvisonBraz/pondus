@@ -71,11 +71,6 @@ export const equipmentImages: EquipmentImage[] = [
     category: "Sistema de Expedição",
     location: "Unidade de armazenamento",
   },
-  {
-    src: "/assets/images/equipamentos-operacao/sistema-expedicao-02.jpeg",
-    category: "Sistema de Expedição",
-    location: "Carregamento ativo",
-  },
 
   // ─── ADICIONE NOVOS EQUIPAMENTOS AQUI ────────────────────────
   // {

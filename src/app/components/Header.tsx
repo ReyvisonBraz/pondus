@@ -272,15 +272,21 @@ export function Header() {
             if (link.hasDropdown) {
               return (
                 <div key={index}>
-                  <div
-                    className="flex items-center justify-between block bg-gradient-to-r from-[#1a3a5c] to-[#f5a623] text-white font-bold text-sm tracking-wide uppercase py-3 px-4 rounded-lg shadow-lg cursor-pointer"
-                    onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
-                  >
-                    <span>{link.name}</span>
-                    <div className="flex items-center gap-2">
+                  <div className="flex items-center bg-gradient-to-r from-[#1a3a5c] to-[#f5a623] rounded-lg shadow-lg overflow-hidden">
+                    <Link
+                      to={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex-1 text-white font-bold text-sm tracking-wide uppercase py-3 px-4"
+                    >
+                      {link.name}
+                    </Link>
+                    <button
+                      onClick={() => setMobileSolutionsOpen(!mobileSolutionsOpen)}
+                      className="flex items-center gap-2 text-white py-3 px-4 border-l border-white/20"
+                    >
                       <span className="bg-white/20 px-2 py-1 rounded text-xs">{products.length} produtos</span>
                       <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileSolutionsOpen ? 'rotate-180' : ''}`} />
-                    </div>
+                    </button>
                   </div>
                   <motion.div
                     initial={false}
