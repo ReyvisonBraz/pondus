@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
 export default defineConfig({
   plugins: [
@@ -9,6 +10,19 @@ export default defineConfig({
     // Tailwind is not being actively used – do not remove them
     react(),
     tailwindcss(),
+    ViteImageOptimizer({
+      /* ─── Otimização de imagens na build de produção ─── */
+      jpeg: { quality: 80 },
+      jpg: { quality: 80 },
+      png: { quality: 80 },
+      webp: { quality: 80 },
+      svg: {
+        multipass: true,
+        plugins: [
+          { name: 'preset-default', params: { overrides: { removeViewBox: false } } },
+        ],
+      },
+    }),
   ],
   resolve: {
     alias: {

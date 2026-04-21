@@ -73,7 +73,7 @@ export const products: Product[] = [
     shortDescription: "Para rações fareladas e peletizadas, com helicoide para compactação.",
     description: "A ensacadeira para ração é utilizada para pesar e embalar produtos farelados e peletizados, principalmente rações. O ensacadeira utiliza um helicoide movido por um motor que ajuda a transportar e compactar o material dentro do saco, o que garante um ensaque mais eficiente. A ensacadeira para ração Pondus é a mais precisa do mercado, ela conta com pré-pesagem e utiliza três cortes para maior precisão de peso.",
     color: "#1a3a5c",
-    image: "/assets/images/ensacadeira-racao-pevprd/pevprd-01.jpeg",
+    image: "/assets/images/ensacadeira-racao-pevprd/pevprd-01.jpg",
     category: "ensacadeira"
   },
   {

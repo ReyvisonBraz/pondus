@@ -3,7 +3,7 @@ import { useInView } from "motion/react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlowButton } from "./ui/glow-button";
-import { products, getEnsacadeiras, getBalancas, getContadoras, getIconByName } from "../../data/products";
+import { products, getEnsacadeiras, getBalancas, getContadoras } from "../../data/products";
 
 function ProductCard({ product, index, isInView }: { product: typeof products[0]; index: number; isInView: boolean }) {
   const navigate = useNavigate();
@@ -25,22 +25,7 @@ function ProductCard({ product, index, isInView }: { product: typeof products[0]
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
-        <div className="absolute top-4 right-4">
-          <motion.div
-            whileHover={{ rotate: 5, scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div
-              className="inline-flex p-3 rounded-xl backdrop-blur-sm"
-              style={{ backgroundColor: `${product.color}90` }}
-            >
-              {(() => {
-                const Icon = getIconByName(product.iconName);
-                return <Icon className="w-6 h-6 text-white" />;
-              })()}
-            </div>
-          </motion.div>
-        </div>
+
       </div>
 
       <div className="p-8">

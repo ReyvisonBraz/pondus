@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
-import { ChevronLeft, ChevronRight, Hand, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Hand, ArrowRight, Package, Boxes, Gauge, PackageCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Contact } from "../components/Contact";
 import { GlowButton } from "../components/ui/glow-button";
-import { products, getIconByName } from "../../data/products";
+import { products, getEnsacadeiras, getBalancas, getContadoras, type Product } from "../../data/products";
+
+/* ─── Featured Carousel ──────────────────────────────── */
 
 function FeaturedCarousel() {
   const [current, setCurrent] = useState(0);
@@ -48,7 +50,6 @@ function FeaturedCarousel() {
   };
 
   const currentProduct = products[current];
-  const IconComponent = getIconByName(currentProduct.iconName);
 
   return (
     <div
@@ -97,15 +98,7 @@ function FeaturedCarousel() {
             </motion.div>
           </div>
 
-          <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md"
-              style={{ backgroundColor: `${currentProduct.color}E6` }}
-            >
-              {IconComponent && <IconComponent className="w-4 h-4 text-white" />}
-              <span className="text-xs sm:text-sm font-semibold text-white">{currentProduct.name.split(' ')[0]}</span>
-            </div>
-            <div className="flex items-center gap-2">
+          <div className="absolute top-4 right-4 flex items-center gap-2">
               {isPaused && (
                 <span className="px-3 py-1 text-xs text-white bg-black/40 rounded-full backdrop-blur-sm flex items-center gap-1.5">
                   <motion.div
@@ -117,7 +110,6 @@ function FeaturedCarousel() {
                   Arraste
                 </span>
               )}
-            </div>
           </div>
 
           <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between">
@@ -154,36 +146,28 @@ function FeaturedCarousel() {
   );
 }
 
-function ProductCard({ product, index, isInView }: { product: typeof products[0]; index: number; isInView: boolean }) {
+/* ─── Product Card ────────────────────────────────────── */
+
+function ProductCard({ product, index, isInView }: { product: Product; index: number; isInView: boolean }) {
   const navigate = useNavigate();
-  const IconComponent = getIconByName(product.iconName);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.5, delay: index * 0.06 }}
       className="group relative cursor-pointer"
       onClick={() => navigate(`/produto/${product.id}`)}
       whileHover={{ y: -4 }}
     >
       <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
-        <div className="relative h-56 overflow-hidden">
+        <div className="relative h-52 overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-          <div className="absolute top-4 left-4">
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md"
-              style={{ backgroundColor: `${product.color}E6` }}
-            >
-              {IconComponent && <IconComponent className="w-4 h-4 text-white" />}
-            </div>
-          </div>
 
           <div className="absolute bottom-4 left-4 right-4">
             <h3 className="text-lg font-bold text-white leading-tight">
@@ -198,18 +182,10 @@ function ProductCard({ product, index, isInView }: { product: typeof products[0]
           </p>
 
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: product.color }} />
-              <span className="text-xs text-gray-500 uppercase tracking-wide">Ver detalhes</span>
-            </div>
-            <motion.div
-              initial={{ x: 0 }}
-              whileHover={{ x: 4 }}
-              transition={{ duration: 0.2 }}
-              className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1a3a5c]/10 group-hover:bg-[#1a3a5c] transition-colors duration-300"
-            >
+            <span className="text-xs text-gray-400 uppercase tracking-wide">Ver detalhes</span>
+            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1a3a5c]/10 group-hover:bg-[#1a3a5c] transition-colors duration-300">
               <ArrowRight className="w-4 h-4 text-[#1a3a5c] group-hover:text-white transition-colors duration-300" />
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -222,6 +198,79 @@ function ProductCard({ product, index, isInView }: { product: typeof products[0]
   );
 }
 
+/* ─── Category Section ────────────────────────────────── */
+
+interface CategorySectionProps {
+  icon: React.ReactNode;
+  title: string;
+  subtitle: string;
+  description: string;
+  accentColor: string;
+  products: Product[];
+  isInView: boolean;
+  delay: number;
+  startIndex: number;
+}
+
+function CategorySection({ icon, title, subtitle, description, accentColor, products: sectionProducts, isInView, delay, startIndex }: CategorySectionProps) {
+  if (sectionProducts.length === 0) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay }}
+      className="mb-20"
+    >
+      {/* Category header */}
+      <div className="flex flex-col sm:flex-row sm:items-end gap-4 mb-8">
+        <div className="flex items-center gap-4">
+          <div
+            className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: `${accentColor}15` }}
+          >
+            {icon}
+          </div>
+          <div>
+            <h3 className="text-2xl sm:text-3xl text-[#1a3a5c] tracking-tight leading-tight" style={{ fontWeight: 800 }}>
+              {title}
+            </h3>
+            <span
+              className="text-xs uppercase tracking-[0.2em] mt-1 inline-block"
+              style={{ color: accentColor, fontFamily: "'DM Mono', monospace", fontWeight: 600 }}
+            >
+              {subtitle}
+            </span>
+          </div>
+        </div>
+        <div className="h-px flex-1 bg-gradient-to-r from-gray-200 to-transparent hidden sm:block" />
+        <p className="text-sm text-gray-500 max-w-xs sm:text-right">
+          {description}
+        </p>
+      </div>
+
+      {/* Product grid */}
+      <div className={`grid grid-cols-1 gap-5 ${
+        sectionProducts.length === 1 ? 'sm:grid-cols-1 max-w-md' :
+        sectionProducts.length === 2 ? 'sm:grid-cols-2' :
+        sectionProducts.length <= 4 ? 'sm:grid-cols-2 lg:grid-cols-3' :
+        'sm:grid-cols-2 lg:grid-cols-3'
+      }`}>
+        {sectionProducts.map((product, idx) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            index={startIndex + idx}
+            isInView={isInView}
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Solutions Page ──────────────────────────────────── */
+
 export function SolutionsPage() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -231,10 +280,25 @@ export function SolutionsPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
+  const ensacadeiras = getEnsacadeiras();
+  const balancas = getBalancas();
+  const contadoras = getContadoras();
+
+  // Split ensacadeiras into sub-groups for visual clarity
+  const ensacadeirasSaco = ensacadeiras.filter(p =>
+    !p.id.includes('big-bag') && p.id !== 'big-bag'
+  );
+  const ensacadeirasBigBag = ensacadeiras.filter(p =>
+    p.id.includes('big-bag') || p.id === 'big-bag'
+  );
+
+  let idx = 0;
+
   return (
     <>
       <section className="relative py-16 md:py-24 bg-[#fafaf9] overflow-hidden">
         <div ref={ref} className="relative max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+          {/* Page Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -255,6 +319,7 @@ export function SolutionsPage() {
             </p>
           </motion.div>
 
+          {/* Featured Carousel */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -263,37 +328,103 @@ export function SolutionsPage() {
             <FeaturedCarousel />
           </motion.div>
 
+          {/* Category Sections */}
+          <div className="mt-16 md:mt-24">
+            {/* Summary bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-wrap items-center justify-center gap-6 mb-12 md:mb-16 p-4 bg-white rounded-xl border border-gray-100 shadow-sm"
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#f5a623]" />
+                <span className="text-sm text-gray-600">
+                  <strong className="text-[#1a3a5c]">{ensacadeiras.length}</strong> Ensacadeiras
+                </span>
+              </div>
+              <div className="w-px h-4 bg-gray-200 hidden sm:block" />
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#1a3a5c]" />
+                <span className="text-sm text-gray-600">
+                  <strong className="text-[#1a3a5c]">{balancas.length}</strong> Balanças
+                </span>
+              </div>
+              <div className="w-px h-4 bg-gray-200 hidden sm:block" />
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#2d7d6b]" />
+                <span className="text-sm text-gray-600">
+                  <strong className="text-[#1a3a5c]">{contadoras.length}</strong> Contadoras
+                </span>
+              </div>
+              <div className="w-px h-4 bg-gray-200 hidden sm:block" />
+              <span className="text-xs text-gray-400 uppercase tracking-wider" style={{ fontFamily: "'DM Mono', monospace" }}>
+                {products.length} produtos no total
+              </span>
+            </motion.div>
+
+            {/* Ensacadeiras para Sacaria */}
+            <CategorySection
+              icon={<Package className="w-6 h-6 text-[#f5a623]" />}
+              title="Ensacadeiras para Sacaria"
+              subtitle={`${ensacadeirasSaco.length} modelos`}
+              description="Soluções para pesagem e ensaque em sacos valvulados e de boca aberta"
+              accentColor="#f5a623"
+              products={ensacadeirasSaco}
+              isInView={isInView}
+              delay={0.4}
+              startIndex={idx}
+            />
+            {(() => { idx += ensacadeirasSaco.length; return null; })()}
+
+            {/* Ensacadeiras para Big-Bag */}
+            <CategorySection
+              icon={<Boxes className="w-6 h-6 text-[#f5a623]" />}
+              title="Ensacadeiras para Big-Bag"
+              subtitle={`${ensacadeirasBigBag.length} modelos`}
+              description="Equipamentos para grandes volumes com precisão e automação"
+              accentColor="#f5a623"
+              products={ensacadeirasBigBag}
+              isInView={isInView}
+              delay={0.5}
+              startIndex={idx}
+            />
+            {(() => { idx += ensacadeirasBigBag.length; return null; })()}
+
+            {/* Balanças */}
+            <CategorySection
+              icon={<Gauge className="w-6 h-6 text-[#1a3a5c]" />}
+              title="Balanças Industriais"
+              subtitle={`${balancas.length} modelos`}
+              description="Medição precisa de fluxo e controle de expedição"
+              accentColor="#1a3a5c"
+              products={balancas}
+              isInView={isInView}
+              delay={0.6}
+              startIndex={idx}
+            />
+            {(() => { idx += balancas.length; return null; })()}
+
+            {/* Contadoras */}
+            <CategorySection
+              icon={<PackageCheck className="w-6 h-6 text-[#2d7d6b]" />}
+              title="Contadoras de Sementes"
+              subtitle={`${contadoras.length} modelo`}
+              description="Contagem por imagem com precisão de 99,9%"
+              accentColor="#2d7d6b"
+              products={contadoras}
+              isInView={isInView}
+              delay={0.7}
+              startIndex={idx}
+            />
+          </div>
+
+          {/* CTA Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-12 md:mt-20"
-          >
-            <div className="flex items-center justify-between mb-6 md:mb-8">
-              <div className="flex items-center gap-3">
-                <div className="w-1.5 h-8 md:h-10 bg-gradient-to-b from-[#f5a623] to-[#1a3a5c] rounded-full" />
-                <h2 className="text-xl sm:text-2xl md:text-3xl text-[#1a3a5c]" style={{ fontWeight: 700 }}>
-                  Nossas Soluções
-                </h2>
-              </div>
-              <div className="hidden md:flex items-center gap-2 text-sm text-gray-500">
-                <span className="w-2 h-2 rounded-full bg-[#f5a623]" />
-                <span>{products.length} produtos</span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {products.map((product, index) => (
-                <ProductCard key={product.id} product={product} index={index} isInView={isInView} />
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-16 md:mt-20"
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="mt-8"
           >
             <div className="relative bg-[#1a3a5c] rounded-3xl p-8 md:p-12 overflow-hidden">
               <div className="absolute inset-0 opacity-10">

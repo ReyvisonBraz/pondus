@@ -128,11 +128,8 @@ export function Header() {
                       className={`${baseClasses} cursor-pointer flex items-center gap-1`}
                       onMouseEnter={() => setSolutionsDropdownOpen(true)}
                       onClick={() => {
-                        if (solutionsDropdownOpen) {
-                          setSolutionsDropdownOpen(false);
-                        } else {
-                          navigate('/solucoes');
-                        }
+                        setSolutionsDropdownOpen(false);
+                        navigate('/solucoes');
                       }}
                     >
                       <span className="relative">
