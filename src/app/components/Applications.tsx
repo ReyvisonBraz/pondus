@@ -7,7 +7,7 @@ const applications = [
   {
     icon: Wheat,
     title: "Sementes",
-    description: "Soluções completas para processamento e ensaque de sementes",
+    description: "Soluções completas para pesagem e fluxo, ensaque e contagem de sementes",
     image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80"
   },
   {
@@ -19,13 +19,13 @@ const applications = [
   {
     icon: Package,
     title: "Grãos",
-    description: "Controle e padronização no processamento de grãos",
+    description: "Controle no fluxo e na expedição a granel.",
     image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=80"
   },
   {
     icon: Boxes,
     title: "Materiais Granulares",
-    description: "Soluções adaptadas para diversos materiais granulares",
+    description: "Soluções adaptadas para materiais granulares e reações.",
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80"
   }
 ];

@@ -36,38 +36,38 @@ export interface EquipmentImage {
 export const equipmentImages: EquipmentImage[] = [
   // ─── CONTADORA DE SEMENTES ──────────────────────────────────
   {
-    src: "/assets/images/equipamentos-operacao/contadora-sementes-01.jpeg",
+    src: "/assets/images/equipamentos-operacao/contadora-sementes-01.webp",
     category: "Contadora de Sementes",
     location: "Linha de produção",
   },
   {
-    src: "/assets/images/equipamentos-operacao/contadora-sementes-02.jpeg",
+    src: "/assets/images/equipamentos-operacao/contadora-sementes-02.webp",
     category: "Contadora de Sementes",
     location: "Integração industrial",
   },
   {
-    src: "/assets/images/equipamentos-operacao/contadora-sementes-03.jpeg",
+    src: "/assets/images/equipamentos-operacao/contadora-sementes-03.webp",
     category: "Contadora de Sementes",
     location: "Operação contínua",
   },
 
   // ─── ENSACADEIRA AUTOMÁTICA ──────────────────────────────────
   {
-    src: "/assets/images/equipamentos-operacao/ensacadeira-automatica-01.jpeg",
+    src: "/assets/images/equipamentos-operacao/ensacadeira-automatica-01.webp",
     category: "Ensacadeira Automática",
     location: "Planta industrial",
   },
 
   // ─── BALANÇA DE FLUXO ────────────────────────────────────────
   {
-    src: "/assets/images/equipamentos-operacao/balanca-fluxo-01.jpeg",
+    src: "/assets/images/equipamentos-operacao/balanca-fluxo-01.webp",
     category: "Balança de Fluxo",
     location: "Expedição de grãos",
   },
 
   // ─── SISTEMA DE EXPEDIÇÃO ────────────────────────────────────
   {
-    src: "/assets/images/equipamentos-operacao/sistema-expedicao-01.jpeg",
+    src: "/assets/images/equipamentos-operacao/sistema-expedicao-01.webp",
     category: "Sistema de Expedição",
     location: "Unidade de armazenamento",
   },

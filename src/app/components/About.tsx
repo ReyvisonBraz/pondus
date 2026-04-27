@@ -119,7 +119,7 @@ export function About() {
               Visão
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              Ser referência em soluções de pesagem, contagem e ensaque para materiais granulares no agro e na indústria.
+              Fortalecer continuamente nossa atuação como referência em soluções de pesagem, contagem e ensaque de sementes e materiais granulares, entregando tecnologia, precisão e resultados para o agro e a indústria.
             </p>
           </div>
 
