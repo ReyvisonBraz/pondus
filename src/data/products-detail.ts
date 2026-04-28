@@ -36,8 +36,14 @@ export const productsDetail: ProductDetail[] = [
     subtitle: "PFD",
     description: "A balança de fluxo é utilizada para medir com precisão o peso de produtos a granel em processos de produção e expedição, como grãos, pós e rações. Ela realiza a pesagem por meio de bateladas, enchendo, pesando e esvaziando a caçamba de pesagem. As balanças de fluxo Pondus têm um diferencial em relação aos nossos concorrentes, elas são compostas por duas caçambas de pesagem trabalhando em conjunto, o material é direcionado hora para uma caçamba, hora para outra, enquanto uma enche a outra esvazia, isso faz com que o fluxo seja mais constante e a balança tenha um tamanho significativamente menor.",
     color: "#1a3a5c",
-    image: "/assets/images/balanca-fluxo-pfd/pfd-01.webp",
-    images: ["/assets/images/balanca-fluxo-pfd/pfd-01.webp"],
+    image: "/assets/images/balanca-fluxo-pfd/pfd-02.webp",
+    images: [
+      "/assets/images/balanca-fluxo-pfd/pfd-02.webp",
+      "/assets/images/balanca-fluxo-pfd/pfd-03.webp",
+      "/assets/images/balanca-fluxo-pfd/pfd-04.webp",
+      "/assets/images/balanca-fluxo-pfd/pfd-05.webp",
+      "/assets/images/balanca-fluxo-pfd/pfd-06.webp"
+    ],
     specs: [],
     features: [],
     comunicacao: {
@@ -45,7 +51,7 @@ export const productsDetail: ProductDetail[] = [
       possibilidade: ["OPC UA", "CANopen", "MQTT"]
     },
     relatedProducts: ["balanca-expedicao-ppcd", "ensacadeira-gravimetrica-pevpd", "contadora-sementes-pcsl"],
-    relatedImage: "/assets/images/balanca-fluxo-pfd/pfd-01.webp"
+    relatedImage: "/assets/images/balanca-fluxo-pfd/pfd-02.webp"
   },
   {
     id: "balanca-expedicao-ppcd",
@@ -158,8 +164,8 @@ export const productsDetail: ProductDetail[] = [
     subtitle: "PEBE",
     description: "Esse é o modelo mais simples da Pondus, a ensacadeira conta com um mecanismo pra prender a boca do big bag no tubo de entrada e ganchos com molas para pendurar o bag no início do processo, a pesagem é feita diretamente na estrutura da balança e a empilhadeira retira o big bag diretamente de dentro da ensacadeira.",
     color: "#1a3a5c",
-    image: "/assets/images/big-bag-basica-pebe/pebe-01.webp",
-    images: ["/assets/images/big-bag-basica-pebe/pebe-01.webp"],
+    image: "/assets/images/big-bag-basica-pebe/pebe-02.webp",
+    images: ["/assets/images/big-bag-basica-pebe/pebe-02.webp"],
     specs: [],
     features: [],
     comunicacao: {
@@ -167,7 +173,7 @@ export const productsDetail: ProductDetail[] = [
       possibilidade: ["OPC UA", "CANopen", "MQTT"]
     },
     relatedProducts: ["big-bag", "big-bag-automatica-pebbag", "balanca-fluxo-pfd"],
-    relatedImage: "/assets/images/big-bag-basica-pebe/pebe-01.webp"
+    relatedImage: "/assets/images/big-bag-basica-pebe/pebe-02.webp"
   },
   {
     id: "big-bag-automatica-pebbag",

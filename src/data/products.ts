@@ -33,7 +33,7 @@ export const products: Product[] = [
     shortDescription: "Medição precisa de produtos a granel com duas caçambas de pesagem para fluxo constante.",
     description: "A balança de fluxo é utilizada para medir com precisão o peso de produtos a granel em processos de produção e expedição, como grãos, pós e rações. Ela realiza a pesagem por meio de bateladas, enchendo, pesando e esvaziando a caçamba de pesagem. As balanças de fluxo Pondus têm um diferencial em relação aos nossos concorrentes, elas são compostas por duas caçambas de pesagem trabalhando em conjunto, o material é direcionado hora para uma caçamba, hora para outra, enquanto uma enche a outra esvazia, isso faz com que o fluxo seja mais constante e a balança tenha um tamanho significativamente menor.",
     color: "#1a3a5c",
-    image: "/assets/images/balanca-fluxo-pfd/pfd-01.webp",
+    image: "/assets/images/balanca-fluxo-pfd/pfd-02.webp",
     category: "balanca"
   },
   {
@@ -93,7 +93,7 @@ export const products: Product[] = [
     shortDescription: "Modelo simples com gancho e mola, pesagem direta na estrutura.",
     description: "Esse é o modelo mais simples da Pondus, a ensacadeira conta com um mecanismo pra prender a boca do big bag no tubo de entrada e ganchos com molas para pendurar o bag no início do processo, a pesagem é feita diretamente na estrutura da balança e a empilhadeira retira o big bag diretamente de dentro da ensacadeira.",
     color: "#1a3a5c",
-    image: "/assets/images/big-bag-basica-pebe/pebe-01.webp",
+    image: "/assets/images/big-bag-basica-pebe/pebe-02.webp",
     category: "ensacadeira"
   },
   {
