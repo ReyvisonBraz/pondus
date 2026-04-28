@@ -25,7 +25,7 @@ const applications = [
   {
     icon: Boxes,
     title: "Materiais Granulares",
-    description: "Soluções adaptadas para materiais granulares e reações.",
+    description: "Soluções adaptadas para materiais granulares e rações.",
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80"
   }
 ];
