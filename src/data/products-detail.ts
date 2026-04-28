@@ -146,8 +146,7 @@ export const productsDetail: ProductDetail[] = [
       "/assets/images/big-bag/bigbag-02.webp",
       "/assets/images/big-bag/bigbag-03.webp",
       "/assets/images/big-bag/bigbag-04.webp",
-      "/assets/images/big-bag/bigbag-05.webp",
-      "/assets/images/big-bag/bigbag-06.webp"
+      "/assets/images/big-bag/bigbag-05.webp"
     ],
     specs: [],
     features: [],
