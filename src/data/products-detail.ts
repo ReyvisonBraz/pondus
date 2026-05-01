@@ -34,7 +34,7 @@ export const productsDetail: ProductDetail[] = [
     id: "balanca-fluxo-pfd",
     name: "Balança de Fluxo",
     subtitle: "PFD",
-    description: "A balança de fluxo é utilizada para medir com precisão o peso de produtos a granel em processos de produção e expedição, como grãos, pós e rações. Ela realiza a pesagem por meio de bateladas, enchendo, pesando e esvaziando a caçamba de pesagem. As balanças de fluxo Pondus têm um diferencial em relação aos nossos concorrentes, elas são compostas por duas caçambas de pesagem trabalhando em conjunto, o material é direcionado hora para uma caçamba, hora para outra, enquanto uma enche a outra esvazia, isso faz com que o fluxo seja mais constante e a balança tenha um tamanho significativamente menor.",
+    description: "A balança de fluxo é utilizada para medir com precisão o peso de sementes e outros produtos a granel, como grãos, pós e rações, em processos de produção e expedição.\n\nSeu funcionamento ocorre por bateladas, realizando ciclos contínuos de enchimento, pesagem e descarga da caçamba, garantindo controle confiável do fluxo de material.\n\nAs balanças de fluxo Pondus se destacam pelo sistema com duas caçambas de pesagem operando em conjunto. O material é direcionado alternadamente entre elas, proporcionando um fluxo mais constante, maior produtividade e um equipamento mais compacto em comparação aos modelos tradicionais.",
     color: "#1a3a5c",
     image: "/assets/images/balanca-fluxo-pfd/pfd-02.webp",
     images: [
@@ -57,7 +57,7 @@ export const productsDetail: ProductDetail[] = [
     id: "balanca-expedicao-ppcd",
     name: "Balança de Expedição",
     subtitle: "PPCD",
-    description: "É um tipo de balança de fluxo que permite que o operador programe a quantidade exata de um produto a granel para ser carregado, normalmente utilizada para agilizar o processo de carregamento e expedição de grãos em unidades de armazenamento. A balança de expedição garante o peso correto na balança rodoviária e não há necessidade de retorno do caminhão para completar carga ou retirar excesso. A balança de expedição Pondus trabalha com duas caçambas de pesagem, o que permite sua utilização diretamente na saída de um elevador, sem necessidade de silo de expedição.",
+    description: "A balança de expedição é um tipo de balança de fluxo que permite programar a quantidade exata de produto a granel a ser carregada em caminhões, vagões ou outros meios de transporte, sendo amplamente utilizada para agilizar processos de carregamento e expedição.\n\nO equipamento garante precisão no peso final, evitando retrabalho na balança rodoviária, como retorno para complemento de carga ou retirada de excesso, aumentando a eficiência operacional.\n\nA balança de expedição Pondus utiliza sistema com duas caçambas de pesagem operando de forma alternada, proporcionando fluxo contínuo e alta produtividade. Esse conceito permite sua instalação diretamente na saída de elevadores ou transportadores, como roscas e correias, eliminando a necessidade de silo de expedição.",
     color: "#f5a623",
     image: "/assets/images/balanca-expedicao-ppcd/ppcd-01.webp",
     images: [
@@ -119,7 +119,7 @@ export const productsDetail: ProductDetail[] = [
     id: "ensacadeira-racao-pevprd",
     name: "Ensacadeira para Ração",
     subtitle: "PEVPRD",
-    description: "A ensacadeira para ração é utilizada para pesar e embalar produtos farelados e peletizados, principalmente rações. O ensacadeira utiliza um helicoide movido por um motor que ajuda a transportar e compactar o material dentro do saco, o que garante um ensaque mais eficiente. A ensacadeira para ração Pondus é a mais precisa do mercado, ela conta com pré-pesagem e utiliza três cortes para maior precisão de peso.",
+    description: "A ensacadeira para ração é desenvolvida para pesar e ensacar produtos farelados e peletizados, especialmente rações, com alta eficiência e precisão.\n\nO equipamento utiliza um sistema helicoidal acionado por motor, que promove o transporte contínuo e controlado do material até a sacaria, garantindo um enchimento uniforme e eficiente.\n\nA ensacadeira para ração Pondus conta ainda com um sistema de acomodação do produto na base da sacaria, acionado por atuador pneumático, que movimenta a embalagem durante o enchimento. Esse recurso melhora a distribuição do material, proporcionando melhor compactação e acabamento final do saco.\n\nAlém disso, possui sistema de pré-pesagem e dosagem eficiente, assegurando alta precisão, padronização e produtividade no processo de ensaque.",
     color: "#1a3a5c",
     image: "/assets/images/ensacadeira-racao-pevprd/pevprd-01.webp",
     images: [
@@ -138,7 +138,7 @@ export const productsDetail: ProductDetail[] = [
     id: "big-bag",
     name: "Ensacadeiras de Big-Bag",
     subtitle: "Big-Bag",
-    description: "A balança de big bag é usada para pesar grandes volumes de materiais a granel de forma precisa e confiável, sendo utilizada principalmente em indústrias e setores como o agronegócio. Sua função é controlar o peso exato dos produtos em sacos big bag durante processos como produção, recebimento e expedição de materiais. A medição precisa da pesagem fornece resultados confiáveis do peso dos materiais. Equipamento de alta resistência, projetado para suportar cargas pesadas e uso industrial. Utilizada em diversas aplicações industriais e comerciais, desde a produção até o recebimento e expedição. A Pondus é especialista em ensacadeiras de big bag e oferece modelos que possibilitam a melhor adequação à sua necessidade.",
+    description: "As ensacadeiras de big bag são projetadas para pesar e ensacar grandes volumes de materiais a granel com precisão e confiabilidade, sendo amplamente utilizadas no agronegócio e na indústria.\n\nEsses equipamentos garantem o controle preciso do peso durante o enchimento de big bags, sendo ideais para materiais granulares como sementes e grãos. A alta precisão na pesagem assegura padronização, confiabilidade e melhor controle operacional.\n\nRobustas e resistentes, são desenvolvidas para suportar cargas elevadas e operação contínua em ambientes industriais.\n\nA Pondus é especialista em ensacadeiras de big bag, oferecendo soluções versáteis e modelos que se adaptam às necessidades específicas de cada operação.",
     color: "#f5a623",
     image: "/assets/images/big-bag/bigbag-01.webp",
     images: [
@@ -178,7 +178,7 @@ export const productsDetail: ProductDetail[] = [
     id: "big-bag-automatica-pebbag",
     name: "Ensacadeira de Big-Bag Automática",
     subtitle: "PEBBAG",
-    description: "A Pondus oferece a balança automática de big bag de forma modular e fica a critério do cliente a configuração desejada. Ela conta com sistema para erguer e baixar big bag para melhor aproveitamento da embalagem. Nessa balança o operador coloca o big bag na ensacadeira e o restante do processo ocorre automaticamente, a balança pesa, enche, solta as alças e boca do big bag para depois posiciona-lo na frente da ensacadeira, para isso pode ser utilizado um carrinho pneumático ou esteiras. Um diferencial de nossa balança é o sistema de checkweigher opcional, o carrinho ou esteira pode vir com um sistema de pesagem para conferência de cada big bag.",
+    description: "A ensacadeira automática de big bag Pondus é desenvolvida com conceito modular, permitindo que o cliente configure o equipamento conforme suas necessidades operacionais.\n\nO sistema conta com elevação e descida do big bag, garantindo melhor aproveitamento da embalagem e maior eficiência no enchimento. Após o posicionamento do big bag pelo operador, todo o restante do processo ocorre de forma automática: pesagem, enchimento e liberação das alças e da boca da embalagem.\n\nApós o ensaque, o big bag pode ser deslocado para a saída por meio de carrinho pneumático ou esteiras, otimizando o fluxo de produção.\n\nComo diferencial, o equipamento pode ser equipado com sistema opcional de checkweigher, integrado ao transporte, permitindo a conferência do peso de cada big bag e garantindo ainda mais precisão e controle de qualidade.",
     color: "#f5a623",
     image: "/assets/images/big-bag-automatica-pebbag/pebbag-01.webp",
     images: ["/assets/images/big-bag-automatica-pebbag/pebbag-01.webp"],
@@ -195,7 +195,7 @@ export const productsDetail: ProductDetail[] = [
     id: "contadora-sementes-pcsl",
     name: "Contadora de Sementes",
     subtitle: "PCSL-22000",
-    description: "A PCSL-22000 é uma solução moderna e de alta precisão para contagem de sementes, ideal para laboratórios e linhas de produção. Utiliza tecnologia de análise por imagem com câmera de alta velocidade e balança digital de precisão, garantindo resultados rápidos e confiáveis no cálculo do PMS (peso de mil sementes). Capaz de contar até 1500 sementes em cerca de 10 segundos, oferece precisão de até 99,9% (para soja), reduzindo erros e eliminando processos manuais. Possui interface intuitiva com tela touchscreen e acesso local ou remoto via navegador web, permitindo exportação de dados em planilhas e integração com outros sistemas via APIs (HTTP REST e MODBUS). Também conta com integração nativa com ensacadeiras Pondus. Disponível em versões para bancada ou integração em linha, adapta-se às necessidades operacionais com eficiência e flexibilidade.",
+    description: "A PCSL-22000 é uma solução moderna e de alta precisão para contagem de sementes, ideal para integração em linhas de produção.\n\nUtiliza tecnologia de análise por imagem com câmera de alta velocidade aliada a uma balança digital de precisão, garantindo resultados rápidos e confiáveis no cálculo do PMS (peso de mil sementes). Com capacidade de contagem em alta velocidade, atinge precisão de até 99,9%, reduzindo erros e eliminando processos manuais.\n\nPossui interface intuitiva com tela touchscreen e acesso local ou remoto via navegador web, permitindo exportação de dados em planilhas e integração com outros sistemas por meio de APIs (HTTP REST e MODBUS).\n\nConta ainda com integração nativa com ensacadeiras Pondus e está disponível nas versões bancada ou linha, adaptando-se com eficiência e flexibilidade às diferentes necessidades operacionais.",
     color: "#1a3a5c",
     image: "/assets/images/contadora-sementes-pcsl/pcsl-01.webp",
     images: [
