@@ -63,7 +63,8 @@ const partners: Partner[] = [
   { id: 1, name: "Autyva", logo: "/assets/images/parceiros/Autyva.webp", websiteUrl: "https://www.autyva.com.br" },
   { id: 2, name: "GNP", logo: "/assets/images/parceiros/GNP.webp", websiteUrl: "https://www.linkedin.com/company/gnp-engenharia/posts/" },
   { id: 3, name: "Hansel", logo: "/assets/images/parceiros/Hansel.webp", websiteUrl: "https://hanselconnect.com" },
-  { id: 4, name: "JC&S", logo: "/assets/images/parceiros/JC&S.webp", websiteUrl: "https://jces-sevicos-especializados-consultoria.lovable.app/" }
+  { id: 4, name: "JC&S", logo: "/assets/images/parceiros/JC&S.webp", websiteUrl: "https://jces-sevicos-especializados-consultoria.lovable.app/" },
+  { id: 5, name: "MK Comercialização Agrícola", logo: "/assets/images/parceiros/MK-comercialização-agricola.png", websiteUrl: "#" }
 ];
 
 export function Clients() {
