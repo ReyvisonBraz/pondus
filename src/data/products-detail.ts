@@ -98,7 +98,7 @@ export const productsDetail: ProductDetail[] = [
     id: "ensacadeira-sopro-pevps",
     name: "Ensacadeira de Sopro",
     subtitle: "PEVPS",
-    description: "A balança ensacadeira de sopro é utilizada para pesar e embalar produtos sólidos a granel, como grãos e rações. O sistema de sopro utiliza uma turbina que ajuda a transportar e compactar o material dentro do saco, o que garante um ensaque mais eficiente. A ensacadeira de sopro Pondus é a mais precisa do mercado, ela conta com pré-pesagem e utiliza três cortes para maior precisão de peso.",
+    description: "A ensacadeira de sopro é ideal para pesar e ensacar produtos sólidos a granel, como sementes, grãos e rações. Seu sistema utiliza um soprador independente que auxilia no transporte e acomodação do material dentro da sacaria, proporcionando um enchimento mais rápido e uniforme.\n\nA ensacadeira de sopro Pondus conta com sistema de pré-pesagem e dosagem eficiente, garantindo maior precisão, produtividade e padronização no processo.\n\nCom capacidade de até 6 sacos por minuto, ensaca sacarias de diferentes pesos, especialmente na faixa de 15 a 60 kg.",
     color: "#f5a623",
     image: "/assets/images/ensacadeira-sopro-pevps/pevps-01.webp",
     images: [
