@@ -79,7 +79,7 @@ export const productsDetail: ProductDetail[] = [
     id: "ensacadeira-gravimetrica-pevpd",
     name: "Ensacadeira Gravimétrica",
     subtitle: "PEVPD",
-    description: "A balança ensacadeira gravimétrica é utilizada para pesar e embalar produtos sólidos a granel, como grãos e rações. Ela garante a precisão do peso em cada saco, o que evita desperdícios, otimiza a produção e garante a qualidade do produto final. A ensacadeira gravimétrica Pondus usa a gravidade pra encher a sacaria e a pesagem ocorre diretamente na sacaria, seu diferencial é o custo mais acessível.",
+    description: "A ensacadeira gravimétrica é ideal para pesagem e embalagem de produtos a granel como grãos, sementes e rações, garantindo precisão, redução de perdas e maior eficiência.\n\nA ensacadeira gravimétrica Pondus utiliza a gravidade para o enchimento, com pesagem direta na sacaria, oferecendo simplicidade, confiabilidade e excelente custo-benefício.\n\nCom capacidade de até 4 sacas por minuto e variação máxima de 40 g, é uma solução compacta, precisa e produtiva.",
     color: "#1a3a5c",
     image: "/assets/images/ensacadeira-gravimetrica-pevpd/pevpd-01.webp",
     images: [
