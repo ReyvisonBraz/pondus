@@ -170,9 +170,11 @@ export function ProductDetailPage() {
                 {product.subtitle}
               </h2>
 
-              <p className="text-base text-gray-600 leading-relaxed mb-8 max-w-xl">
-                {product.description}
-              </p>
+              <div className="text-base text-gray-600 leading-relaxed mb-8 max-w-xl space-y-3">
+                {product.description.split('\n\n').map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
+              </div>
 
               <div className="flex gap-4 mb-12">
                 <button
