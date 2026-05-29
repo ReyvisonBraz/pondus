@@ -213,20 +213,22 @@ export function ProductDetailPage() {
                   Financiamento de Máquinas e Equipamentos
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                  Equipamentos industriais financiados pelo <strong>BNDES FINAME</strong> com condições especiais: taxas competitivas, financiamento de até 100% do valor do equipamento, prazo de pagamento extensible e agilidade na aprovação do crédito.
+                  Equipamentos com cadastro no <strong>BNDES FINAME</strong>, com financiamento sujeito à análise e aprovação do banco do cliente.
+                  <br />
+                  Taxas, prazos e condições conforme política de cada instituição financeira.
                 </p>
                 <div className="flex flex-wrap gap-6">
                   <div className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-[#f5a623]" />
-                    <span className="text-xs text-gray-600" style={{ fontFamily: "'DM Mono', monospace" }}>Taxas competitivas</span>
+                    <span className="text-xs text-gray-600" style={{ fontFamily: "'DM Mono', monospace" }}>Cadastro FINAME</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-[#f5a623]" />
-                    <span className="text-xs text-gray-600" style={{ fontFamily: "'DM Mono', monospace" }}>Até 100% do valor</span>
+                    <span className="text-xs text-gray-600" style={{ fontFamily: "'DM Mono', monospace" }}>Sujeito à aprovação</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-[#f5a623]" />
-                    <span className="text-xs text-gray-600" style={{ fontFamily: "'DM Mono', monospace" }}>Parcelamento em até 10 anos</span>
+                    <span className="text-xs text-gray-600" style={{ fontFamily: "'DM Mono', monospace" }}>Condições do banco</span>
                   </div>
                 </div>
               </div>

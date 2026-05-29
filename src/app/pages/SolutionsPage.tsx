@@ -250,8 +250,8 @@ function CategorySection({ icon, title, subtitle, description, accentColor, prod
       </div>
 
       {/* Product grid */}
-      <div className={`grid grid-cols-1 gap-5 ${
-        sectionProducts.length === 1 ? 'sm:grid-cols-1 max-w-md' :
+      <div className={`grid grid-cols-1 gap-5 justify-items-center ${
+        sectionProducts.length === 1 ? 'sm:grid-cols-1 max-w-md mx-auto' :
         sectionProducts.length === 2 ? 'sm:grid-cols-2' :
         sectionProducts.length <= 4 ? 'sm:grid-cols-2 lg:grid-cols-3' :
         'sm:grid-cols-2 lg:grid-cols-3'

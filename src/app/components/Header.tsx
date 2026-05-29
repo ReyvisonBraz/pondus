@@ -55,9 +55,21 @@ export function Header() {
     { name: "Soluções", href: "/solucoes", isRoute: true, hasDropdown: true },
     { name: "Quem Somos", href: "/quem-somos", isRoute: true },
     { name: "Clientes", href: "/clientes", isRoute: true },
+    { name: "Documentos", href: "/documentos", isRoute: true },
     { name: "Blog", href: "/blog", isRoute: true },
     { name: "Contato", href: "/contato", isRoute: true }
   ];
+
+  const handleRouteLinkClick = (e: React.MouseEvent, href: string) => {
+    if (href !== '/') return;
+
+    e.preventDefault();
+    setSolutionsDropdownOpen(false);
+    navigate('/');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 0);
+  };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: typeof navLinks[0]) => {
     if (link.isRoute) {
@@ -114,7 +126,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6" ref={dropdownRef}>
+          <nav className="hidden lg:flex items-center gap-5" ref={dropdownRef}>
             {navLinks.map((link, index) => {
               const baseClasses = "relative text-gray-600 hover:text-[#1a3a5c] transition-colors duration-200 text-sm tracking-wide uppercase group py-2";
 
@@ -216,7 +228,7 @@ export function Header() {
               );
 
               return (
-                <Link key={index} to={link.href}>
+                <Link key={index} to={link.href} onClick={(e) => handleRouteLinkClick(e, link.href)}>
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -363,7 +375,14 @@ export function Header() {
             }
 
             return link.isRoute ? (
-              <Link key={index} to={link.href} onClick={() => setMobileMenuOpen(false)}>
+              <Link
+                key={index}
+                to={link.href}
+                onClick={(e) => {
+                  handleRouteLinkClick(e, link.href);
+                  setMobileMenuOpen(false);
+                }}
+              >
                 <motion.div
                   initial={{ x: -20, opacity: 0 }}
                   animate={mobileMenuOpen ? { x: 0, opacity: 1 } : {}}

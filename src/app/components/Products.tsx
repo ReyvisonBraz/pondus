@@ -13,7 +13,7 @@ function ProductCard({ product, index, isInView }: { product: typeof products[0]
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="group relative bg-white rounded-2xl border-2 border-gray-200 hover:border-transparent overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
+      className="group relative w-full max-w-md sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] bg-white rounded-2xl border-2 border-gray-200 hover:border-transparent overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
       whileHover={{ y: -4, scale: 1.01 }}
       onClick={() => navigate(`/produto/${product.id}`)}
     >
@@ -125,7 +125,7 @@ export function Products() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="flex flex-wrap justify-center gap-6 md:gap-8">
               {ensacadeiras.map((product) => (
                 <ProductCard
                   key={product.id}
@@ -156,7 +156,7 @@ export function Products() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="flex flex-wrap justify-center gap-6 md:gap-8">
               {balancas.map((product) => (
                 <ProductCard
                   key={product.id}
@@ -187,7 +187,7 @@ export function Products() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="flex flex-wrap justify-center gap-6 md:gap-8">
               {contadoras.map((product) => (
                 <ProductCard
                   key={product.id}

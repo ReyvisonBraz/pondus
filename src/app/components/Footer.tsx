@@ -16,6 +16,7 @@ export function Footer() {
       '#solucoes': '/solucoes',
       '#quem-somos': '/quem-somos',
       '#clientes': '/clientes',
+      '#documentos': '/documentos',
       '#blog': '/blog',
       '#contato': '/contato'
     };
@@ -105,6 +106,7 @@ export function Footer() {
                 { name: "Soluções", href: "#solucoes" },
                 { name: "Quem Somos", href: "#quem-somos" },
                 { name: "Clientes", href: "#clientes" },
+                { name: "Documentos", href: "#documentos" },
                 { name: "Blog", href: "#blog" },
                 { name: "Contato", href: "#contato" }
               ].map((link, index) => (
@@ -134,7 +136,7 @@ export function Footer() {
                 { name: "Ensacadeira para Big-Bags", href: "/produto/big-bag" },
                 { name: "Ensacadeira de Sopro", href: "/produto/ensacadeira-sopro-pevps" },
                 { name: "Balança de Fluxo", href: "/produto/balanca-fluxo-pfd" },
-                { name: "Ensacadeira Gravimétrica", href: "/produto/ensacadeira-gravimetrica-pevpd" },
+                { name: "Ensacadeira Gravimétrica", href: "/produto/ensacadeira-gravimetrica-peved" },
                 { name: "Ensacadeira para Ração", href: "/produto/ensacadeira-racao-pevprd" },
                 { name: "Balança de Expedição", href: "/produto/balanca-expedicao-ppcd" },
                 { name: "Big-Bag Básica", href: "/produto/big-bag-basica-pebe" },

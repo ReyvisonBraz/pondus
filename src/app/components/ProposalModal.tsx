@@ -6,6 +6,7 @@ const products = [
   { id: "pcsl-22000", name: "Contadora de Sementes PCSL 22000" },
   { id: "pebbag-1500", name: "Ensacadeira Big-Bags PEBBAG 1500" },
   { id: "pevps-2060", name: "Ensacadeira de Sopro PEVPS 2060" },
+  { id: "sacaria-pondus", name: "Ensacadeiras para Sacaria Pondus" },
   { id: "pfd-30t", name: "Balança de Fluxo PFD 30T" },
   { id: "pebe-2000", name: "Ensacadeira com Dosagem PEBE2000" },
   { id: "peved-2060", name: "Ensacadeira Eletrônica PEVED 2060" }

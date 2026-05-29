@@ -67,6 +67,42 @@ const partners: Partner[] = [
   { id: 5, name: "MK Comercialização Agrícola", logo: "/assets/images/parceiros/MK-comercialização-agricola.png", websiteUrl: "#" }
 ];
 
+const firstClientRow = clients.slice(0, Math.ceil(clients.length / 2));
+const secondClientRow = clients.slice(Math.ceil(clients.length / 2));
+
+function ClientLogoRow({ rowClients, reverse = false }: { rowClients: Client[]; reverse?: boolean }) {
+  return (
+    <motion.div
+      className="flex gap-6"
+      animate={{
+        x: reverse ? [-1800, 0] : [0, -1800]
+      }}
+      transition={{
+        x: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 35,
+          ease: "linear"
+        }
+      }}
+    >
+      {[...rowClients, ...rowClients, ...rowClients].map((client, index) => (
+        <motion.div
+          key={`${client.id}-${index}`}
+          className="flex-shrink-0 w-40 h-24 bg-white rounded-xl border border-gray-200 flex items-center justify-center shadow-md hover:shadow-xl hover:border-[#f5a623]/40 transition-all duration-300 overflow-hidden"
+          whileHover={{ y: -3, scale: 1.03 }}
+        >
+          <img
+            src={client.logo}
+            alt={client.name}
+            className="max-w-full max-h-full object-contain p-2"
+          />
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+}
+
 export function Clients() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -115,39 +151,10 @@ export function Clients() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="relative overflow-hidden mb-20"
+          className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden mb-20 space-y-6"
         >
-          <motion.div
-            className="flex gap-6"
-            animate={{
-              x: [0, -1800]
-            }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 35,
-                ease: "linear"
-              }
-            }}
-          >
-            {[...clients, ...clients].map((client, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: (index % clients.length) * 0.02 }}
-                className="flex-shrink-0 w-40 h-24 bg-white rounded-xl border border-gray-200 flex items-center justify-center shadow-md hover:shadow-xl hover:border-[#f5a623]/40 transition-all duration-300 overflow-hidden"
-                whileHover={{ y: -3, scale: 1.03 }}
-              >
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="max-w-full max-h-full object-contain p-2"
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+          <ClientLogoRow rowClients={firstClientRow} />
+          <ClientLogoRow rowClients={secondClientRow} reverse />
         </motion.div>
 
         <motion.div
@@ -162,7 +169,7 @@ export function Clients() {
           <div className="w-16 h-1 bg-[#f5a623] mx-auto mt-2 rounded-full" />
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {partners.map((partner, index) => (
             <motion.a
               key={partner.id}
@@ -172,7 +179,7 @@ export function Clients() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.1 * index }}
-              className="group flex flex-col items-center"
+              className="group flex w-full max-w-[260px] flex-col items-center sm:w-[calc(50%-1rem)] md:w-[calc(25%-1.5rem)]"
               whileHover={{ y: -5 }}
             >
               <div className="w-full aspect-[4/3] bg-white rounded-2xl border-2 border-gray-200 p-4 flex items-center justify-center shadow-lg hover:shadow-2xl hover:border-[#f5a623]/50 transition-all duration-300 overflow-hidden">

@@ -90,10 +90,17 @@ export function Contact() {
               </div>
             </motion.button>
 
-            <motion.button
+            <motion.div
               whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedMethod("email")}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setSelectedMethod("email");
+                }
+              }}
+              role="button"
+              tabIndex={0}
               className="flex flex-col items-center gap-5 p-10 rounded-3xl border-2 border-gray-100 hover:border-[#1a3a5c] bg-white hover:bg-[#1a3a5c]/5 transition-all shadow-lg"
             >
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#1a3a5c] to-[#2a4a6c] flex items-center justify-center shadow-lg shadow-[#1a3a5c]/30">
@@ -112,7 +119,7 @@ export function Contact() {
                   {EMAIL}
                 </button>
               </div>
-            </motion.button>
+            </motion.div>
           </motion.div>
         ) : selectedMethod === "whatsapp" ? (
           <motion.div

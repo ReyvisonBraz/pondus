@@ -34,7 +34,7 @@ export const productsDetail: ProductDetail[] = [
     id: "balanca-fluxo-pfd",
     name: "Balança de Fluxo",
     subtitle: "PFD",
-    description: "A balança de fluxo é utilizada para medir com precisão o peso de sementes e outros produtos a granel, como grãos, pós e rações, em processos de produção e expedição.\n\nSeu funcionamento ocorre por bateladas, realizando ciclos contínuos de enchimento, pesagem e descarga da caçamba, garantindo controle confiável do fluxo de material.\n\nAs balanças de fluxo Pondus se destacam pelo sistema com duas caçambas de pesagem operando em conjunto. O material é direcionado alternadamente entre elas, proporcionando um fluxo mais constante, maior produtividade e um equipamento mais compacto em comparação aos modelos tradicionais.",
+    description: "A balança de fluxo é utilizada para medir com precisão o peso de sementes e outros produtos a granel, como grãos, pós e rações, em processos de produção e expedição.\n\nSeu funcionamento ocorre por bateladas, realizando ciclos contínuos de enchimento, pesagem e descarga da caçamba, garantindo controle confiável do fluxo de material.\n\nAs balanças de fluxo Pondus se destacam pelo sistema com duas caçambas de pesagem operando em conjunto. O material é direcionado alternadamente entre elas, proporcionando um fluxo mais constante, maior produtividade e um equipamento mais compacto em comparação aos modelos tradicionais.\n\nCapacidades disponíveis de 5 ton/h até 800 ton/h ou superiores, conforme necessidade e projeto de cada cliente.",
     color: "#1a3a5c",
     image: "/assets/images/balanca-fluxo-pfd/pfd-02.webp",
     images: [
@@ -50,7 +50,7 @@ export const productsDetail: ProductDetail[] = [
       disponivel: ["Modbus TCP", "EtherNet IP", "Profinet"],
       possibilidade: ["OPC UA", "CANopen", "MQTT"]
     },
-    relatedProducts: ["balanca-expedicao-ppcd", "ensacadeira-gravimetrica-pevpd", "contadora-sementes-pcsl"],
+    relatedProducts: ["balanca-expedicao-ppcd", "ensacadeira-gravimetrica-peved", "contadora-sementes-pcsl"],
     relatedImage: "/assets/images/balanca-fluxo-pfd/pfd-02.webp"
   },
   {
@@ -72,18 +72,19 @@ export const productsDetail: ProductDetail[] = [
       disponivel: ["Modbus TCP", "EtherNet IP", "Profinet"],
       possibilidade: ["OPC UA", "CANopen", "MQTT"]
     },
-    relatedProducts: ["balanca-fluxo-pfd", "ensacadeira-gravimetrica-pevpd", "big-bag"],
+    relatedProducts: ["balanca-fluxo-pfd", "ensacadeira-gravimetrica-peved", "big-bag"],
     relatedImage: "/assets/images/balanca-expedicao-ppcd/ppcd-01.webp"
   },
   {
-    id: "ensacadeira-gravimetrica-pevpd",
+    id: "ensacadeira-gravimetrica-peved",
     name: "Ensacadeira Gravimétrica",
-    subtitle: "PEVPD",
+    subtitle: "PEVED",
     description: "A ensacadeira gravimétrica é ideal para pesagem e embalagem de produtos a granel como grãos, sementes e rações, garantindo precisão, redução de perdas e maior eficiência.\n\nA ensacadeira gravimétrica Pondus utiliza a gravidade para o enchimento, com pesagem direta na sacaria, oferecendo simplicidade, confiabilidade e excelente custo-benefício.\n\nCom capacidade de até 4 sacas por minuto e variação máxima de 40 g, é uma solução compacta, precisa e produtiva.",
     color: "#1a3a5c",
-    image: "/assets/images/ensacadeira-gravimetrica-pevpd/pevpd-01.webp",
+    image: "/assets/images/ensacadeira-gravimetrica-peved/peved-01.webp",
     images: [
-      "/assets/images/ensacadeira-gravimetrica-pevpd/pevpd-01.webp"
+      "/assets/images/ensacadeira-gravimetrica-peved/peved-01.webp",
+      "/assets/images/ensacadeira-gravimetrica-peved/peved-02.webp"
     ],
     specs: [],
     features: [],
@@ -92,7 +93,7 @@ export const productsDetail: ProductDetail[] = [
       possibilidade: ["OPC UA", "CANopen", "MQTT"]
     },
     relatedProducts: ["ensacadeira-sopro-pevps", "ensacadeira-racao-pevprd", "contadora-sementes-pcsl"],
-    relatedImage: "/assets/images/ensacadeira-gravimetrica-pevpd/pevpd-01.webp"
+    relatedImage: "/assets/images/ensacadeira-gravimetrica-peved/peved-01.webp"
   },
   {
     id: "ensacadeira-sopro-pevps",
@@ -103,8 +104,7 @@ export const productsDetail: ProductDetail[] = [
     image: "/assets/images/ensacadeira-sopro-pevps/pevps-01.webp",
     images: [
       "/assets/images/ensacadeira-sopro-pevps/pevps-01.webp",
-      "/assets/images/ensacadeira-sopro-pevps/pevps-02.webp",
-      "/assets/images/ensacadeira-sopro-pevps/pevps-03.webp"
+      "/assets/images/ensacadeira-sopro-pevps/pevps-02.webp"
     ],
     specs: [],
     features: [],
@@ -112,8 +112,32 @@ export const productsDetail: ProductDetail[] = [
       disponivel: ["Modbus TCP", "EtherNet IP", "Profinet"],
       possibilidade: ["OPC UA", "CANopen", "MQTT"]
     },
-    relatedProducts: ["ensacadeira-gravimetrica-pevpd", "ensacadeira-racao-pevprd", "contadora-sementes-pcsl"],
+    relatedProducts: ["ensacadeira-gravimetrica-peved", "ensacadeira-racao-pevprd", "contadora-sementes-pcsl"],
     relatedImage: "/assets/images/ensacadeira-sopro-pevps/pevps-01.webp"
+  },
+  {
+    id: "ensacadeiras-sacaria-pondus",
+    name: "Ensacadeiras para Sacaria Pondus",
+    subtitle: "Tecnologia, precisão e eficiência para o seu processo",
+    description: "As ensacadeiras para sacaria da Pondus são desenvolvidas para oferecer alta precisão na pesagem e ensaque de produtos a granel, garantindo produtividade, padronização e confiabilidade em diferentes processos industriais e do agronegócio.\n\nProjetadas para operar com diversos tipos de materiais, como sementes, grãos, farelos, fertilizantes e outros produtos granulados, as ensacadeiras Pondus unem tecnologia avançada, robustez mecânica e facilidade operacional.\n\nContamos com diferentes modelos e configurações, permitindo que cada cliente encontre a solução mais adequada para sua necessidade produtiva, capacidade operacional e nível de automação. Nossa linha atende desde operações de menor porte até processos industriais de alta demanda, sempre com foco em desempenho, precisão e durabilidade.\n\nOs equipamentos possuem sistemas modernos de pesagem e controle, proporcionando enchimento rápido e preciso, redução de perdas, maior padronização dos volumes ensacados e melhor eficiência operacional.\n\nDiferenciais das Ensacadeiras para Sacaria Pondus: alta precisão na pesagem, excelente desempenho operacional, equipamentos robustos e duráveis, modelos para diferentes capacidades de produção, tecnologia moderna e fácil operação, baixa manutenção, soluções personalizadas conforme o processo do cliente e integração com linhas automatizadas.\n\nA Pondus desenvolve soluções inteligentes para ensaque, oferecendo equipamentos confiáveis, eficientes e preparados para atender as exigências do mercado moderno. Uma de nossas ensacadeiras será a solução ideal para suprir a demanda e otimizar o processo da sua empresa.",
+    color: "#f5a623",
+    image: "/assets/images/ensacadeiras-sacaria-pondus/sacaria-01.webp",
+    images: [
+      "/assets/images/ensacadeiras-sacaria-pondus/sacaria-01.webp"
+    ],
+    specs: [],
+    features: [
+      { title: "Alta precisão", description: "Pesagem confiável" },
+      { title: "Desempenho operacional", description: "Enchimento rápido e preciso" },
+      { title: "Robustez", description: "Equipamentos duráveis" },
+      { title: "Soluções personalizadas", description: "Configuração conforme o processo" }
+    ],
+    comunicacao: {
+      disponivel: ["Modbus TCP", "EtherNet IP", "Profinet"],
+      possibilidade: ["OPC UA", "CANopen", "MQTT"]
+    },
+    relatedProducts: ["ensacadeira-gravimetrica-peved", "ensacadeira-sopro-pevps", "ensacadeira-racao-pevprd"],
+    relatedImage: "/assets/images/ensacadeiras-sacaria-pondus/sacaria-01.webp"
   },
   {
     id: "ensacadeira-racao-pevprd",
@@ -131,7 +155,7 @@ export const productsDetail: ProductDetail[] = [
       disponivel: ["Modbus TCP", "EtherNet IP", "Profinet"],
       possibilidade: ["OPC UA", "CANopen", "MQTT"]
     },
-    relatedProducts: ["ensacadeira-sopro-pevps", "ensacadeira-gravimetrica-pevpd", "contadora-sementes-pcsl"],
+    relatedProducts: ["ensacadeira-sopro-pevps", "ensacadeira-gravimetrica-peved", "contadora-sementes-pcsl"],
     relatedImage: "/assets/images/ensacadeira-racao-pevprd/pevprd-01.webp"
   },
   {
@@ -224,7 +248,7 @@ export const productsDetail: ProductDetail[] = [
       disponivel: ["Modbus TCP", "EtherNet IP", "Profinet"],
       possibilidade: ["OPC UA", "CANopen", "MQTT"]
     },
-    relatedProducts: ["balanca-fluxo-pfd", "ensacadeira-gravimetrica-pevpd", "ensacadeira-sopro-pevps"],
+    relatedProducts: ["balanca-fluxo-pfd", "ensacadeira-gravimetrica-peved", "ensacadeira-sopro-pevps"],
     relatedImage: "/assets/images/contadora-sementes-pcsl/pcsl-01.webp"
   }
 ];
